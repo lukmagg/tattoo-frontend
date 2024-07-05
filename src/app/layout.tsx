@@ -16,7 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <header>###_Layout general_### Sistema de agenda de tattoo </header>
+        {children}
+        <footer className="py-10 flex justify-center items-center">
+          ###_Footer_### 1009 Tattoo - Ushuaia, Tierra del fuego. 2024
+        </footer>
+      </body>
     </html>
   );
 }
