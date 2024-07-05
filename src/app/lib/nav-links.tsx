@@ -2,17 +2,19 @@ import {
   HomeIcon,
   UserIcon,
   CogIcon,
-  MenuIcon,
-  XIcon,
   LogoutIcon,
+  DocumentIcon,
+  CalendarIcon,
 } from "@heroicons/react/outline";
 import Link from "next/link";
 
 // Para agregar un linu nuevo al nav bar solo agregr un item en links
 const links = [
   { name: "Home", href: "/dashboard", icon: HomeIcon },
-  { name: "Invoices", href: "/dashboard/invoices", icon: UserIcon },
+  { name: "Invoices", href: "/dashboard/invoices", icon: DocumentIcon },
   { name: "Customers", href: "/dashboard/customers", icon: CogIcon },
+  { name: "Site Tattoo", href: "/dashboard/site", icon: UserIcon },
+  { name: "Calendar", href: "/dashboard/calendar", icon: CalendarIcon },
   { name: "Sign out", href: "/dashboard/signout", icon: LogoutIcon },
 ];
 
