@@ -1,35 +1,19 @@
-"use client";
-import Image from "next/image";
-import { useState } from "react";
+import BodyPlace from "@/app/components/BodyPlace";
 
 export default function Page() {
-  const [selectedPart, setSelectedPart] = useState("");
-
-  const handleClick = (part: string) => {
-    setSelectedPart(part);
-    console.log(`You selected: ${part}`);
-  };
-
   return (
-    <div className="body-container">
-      <Image src="/body.png" width={1000} height={760} alt="Human Body" />
-      <div className="body-part head" onClick={() => handleClick("head")}></div>
-      <div
-        className="body-part left-arm"
-        onClick={() => handleClick("left-arm")}
-      ></div>
-      <div
-        className="body-part right-arm"
-        onClick={() => handleClick("right-arm")}
-      ></div>
-      <div
-        className="body-part left-leg"
-        onClick={() => handleClick("left-leg")}
-      ></div>
-      <div
-        className="body-part right-leg"
-        onClick={() => handleClick("right-leg")}
-      ></div>
+    <div className="flex m-10">
+      <div className="text-3xl m-auto">
+        <p className="text-center leading-loose">
+          Seleccione el lugar del tattoo
+        </p>
+        <p className="text-center leading-loose">luego presione ok!</p>
+        <p className="text-center leading-loose">
+          El sistema generara un presupuesto
+        </p>
+        <p className="text-center leading-loose">aproximado...</p>
+      </div>
+      <BodyPlace />
     </div>
   );
 }

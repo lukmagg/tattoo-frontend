@@ -62,7 +62,7 @@ body {
     left: 380px;
     width: 120px;
     height: 120px;
-    border: 2px solid red;
+    //border: 2px solid red;
   }
 }
 
@@ -73,7 +73,7 @@ body {
     left: 505px;
     width: 140px;
     height: 130px;
-    border: 2px solid red;
+    //border: 2px solid red;
   }
 }
 
@@ -89,6 +89,7 @@ body {
   max-height: 90vh; /* La imagen no será más alta que la altura del viewport */
   display: block; /* Asegura que la imagen se comporte como un bloque */
   margin: auto; /* Centra la imagen horizontalmente */
+  border-radius: 20px;
 }
 .body-part {
   position: absolute;
@@ -107,7 +108,7 @@ body {
   left: 400px;
   width: 80px;
   height: 150px;
-  border: 2px solid green;
+  //border: 2px solid green;
 }
 .right-arm {
   top: 120px;
