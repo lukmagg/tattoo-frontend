@@ -62,7 +62,7 @@ body {
     left: 380px;
     width: 120px;
     height: 120px;
-    //border: 2px solid red;
+    border: 2px solid red;
   }
 }
 
@@ -73,7 +73,7 @@ body {
     left: 505px;
     width: 140px;
     height: 130px;
-    //border: 2px solid red;
+    border: 2px solid red;
   }
 }
 
@@ -108,7 +108,7 @@ body {
   left: 400px;
   width: 80px;
   height: 150px;
-  //border: 2px solid green;
+  border: 2px solid green;
 }
 .right-arm {
   top: 120px;
@@ -127,4 +127,11 @@ body {
   left: 160px;
   width: 60px;
   height: 120px;
+}
+
+.disabled-link {
+  color: gray;
+  pointer-events: none;
+  cursor: not-allowed;
+  text-decoration: none;
 }

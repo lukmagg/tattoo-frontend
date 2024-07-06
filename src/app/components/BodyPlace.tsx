@@ -1,13 +1,18 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useGlobalState } from "../context/GlobalState";
 
 export default function BodyPlace() {
-  const [selectedPart, setSelectedPart] = useState("");
+  const { globalState, setGlobalState } = useGlobalState();
+
+  useEffect(() => {
+    console.log("Nuevo valor de pasar:", globalState.nextTab);
+    console.log("Nuevo valor de tattooPlace:", globalState.tattooPlace);
+  }, [globalState.nextTab, globalState.tattooPlace]);
 
   const handleClick = (part: string) => {
-    setSelectedPart(part);
-    console.log(`You selected: ${part}`);
+    setGlobalState({ ...globalState, tattooPlace: part, allowSize: true });
   };
 
   return (

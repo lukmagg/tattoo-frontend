@@ -2,8 +2,8 @@ import BodyPlace from "@/app/components/BodyPlace";
 
 export default function Page() {
   return (
-    <div className="flex m-10">
-      <div className="text-3xl m-auto">
+    <div className="flex justify-center align-center  mx-10">
+      <div className="text-3xl m-auto flex-1">
         <p className="text-center leading-loose">
           Seleccione el lugar del tattoo
         </p>
@@ -13,7 +13,9 @@ export default function Page() {
         </p>
         <p className="text-center leading-loose">aproximado...</p>
       </div>
-      <BodyPlace />
+      <div className="flex-1">
+        <BodyPlace />
+      </div>
     </div>
   );
 }

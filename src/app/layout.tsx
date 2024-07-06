@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { GlobalStateProvider } from "@/app/context/GlobalState";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,14 +16,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        {/* <header>###_Layout general_### Sistema de agenda de tattoo </header> */}
-        {children}
-        {/* <footer className="py-10 flex justify-center items-center">
+    <GlobalStateProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          {/* <header>###_Layout general_### Sistema de agenda de tattoo </header> */}
+          {children}
+          {/* <footer className="py-10 flex justify-center items-center">
           ###_Footer_### 1009 Tattoo - Ushuaia, Tierra del fuego. 2024
         </footer> */}
-      </body>
-    </html>
+        </body>
+      </html>
+    </GlobalStateProvider>
   );
 }
