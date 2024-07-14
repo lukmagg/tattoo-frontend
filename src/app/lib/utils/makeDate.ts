@@ -8,8 +8,8 @@ export default function makeDate(
   min: number
 ) {
   const date = dayjs(new Date(year, month, day, hour, min)).format(
-    "ddd MMM DD YYYY HH:mm:ss [GMT]Z [(]ZZ[)]"
+    "MM DD YYYY HH:mm"
   );
 
-  return date;
+  return dayjs(date);
 }

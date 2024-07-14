@@ -7,40 +7,9 @@ import makeDate from "../lib/utils/makeDate";
 import hourFormatter from "../lib/utils/hourFormatter";
 import dateIsDisponible from "../lib/utils/dateIsDisponible";
 import dayjs, { Dayjs } from "dayjs";
-import { eventNames } from "process";
-
-const hours = [
-  { date: "08:00", index: 8 },
-  { date: "09:00", index: 9 },
-  { date: "10:00", index: 10 },
-  { date: "11:00", index: 11 },
-  { date: "12:00", index: 12 },
-  { date: "13:00", index: 13 },
-  { date: "14:00", index: 14 },
-  { date: "15:00", index: 15 },
-  { date: "16:00", index: 16 },
-  { date: "17:00", index: 17 },
-  { date: "18:00", index: 18 },
-  { date: "19:00", index: 19 },
-  { date: "20:00", index: 20 },
-  { date: "21:00", index: 21 },
-  { date: "22:00", index: 22 },
-];
-
-const months = [
-  { date: "Enero", index: 0 },
-  { date: "Febrero", index: 1 },
-  { date: "Marzo", index: 2 },
-  { date: "Abril", index: 3 },
-  { date: "Mayo", index: 4 },
-  { date: "Junio", index: 5 },
-  { date: "Julio", index: 6 },
-  { date: "Agosto", index: 7 },
-  { date: "Septiembre", index: 8 },
-  { date: "Octubre", index: 9 },
-  { date: "Noviembre", index: 10 },
-  { date: "Diciembre", index: 11 },
-];
+import notify from "../lib/utils/Notifications";
+import nameMonthToNumber from "../lib/utils/nameMonthToNumber";
+import { TattooEvent, hours, months } from "../constants";
 
 const days = Array.from({ length: 30 }, (_, i) => ({
   date: (i + 1).toString(),
@@ -52,39 +21,47 @@ export default function DateSelector() {
 
   const { globalState, setGlobalState } = useGlobalState();
 
+  const [stringHour, setStringHour] = useState("08:00 AM");
+
+  const [hour, setHour] = useState(8);
+
+  const [minutes, setMinutes] = useState(0);
+
   const [day, setDay] = useState(1);
   const [monthValue, setMonthValue] = useState("Enero");
-  const [monthIndex, setMonthIndex] = useState(0);
+  const [monthNumber, setMonthNumber] = useState(0);
 
-  const [hour, setHour] = useState("01:00 AM");
-  const [date, setDate] = useState<Dayjs>();
+  const [date, setDate] = useState<Dayjs>(dayjs());
 
-  useEffect(() => {}, [monthIndex]);
+  useEffect(() => {
+    const { HH, mm } = hourFormatter(stringHour);
+    setHour(HH);
+    setMinutes(mm);
+    const newDate = makeDate(day, monthNumber, 2024, hour, minutes);
+    setDate(newDate);
+  }, [stringHour, day, hour, minutes, monthNumber]);
 
   const handleClick = () => {
-    const { HH, mm } = hourFormatter(hour);
-
-    const newDate = makeDate(day, monthIndex, 2024, HH, mm);
-
-    const dateToCompare = dayjs(newDate);
-
-    if (dateIsDisponible(globalState.myEventsList, dateToCompare)) {
+    if (dateIsDisponible(globalState.myEventsList, date)) {
       const newEvent = {
-        start: dateToCompare.toDate(),
-        end: dateToCompare.add(2, "hour").toDate(),
+        start: date.toDate(),
+        end: date.add(2, "hour").toDate(),
         title: "tattoo 4",
       };
 
-      setGlobalState((prevState: { myEventsList: any }) => ({
+      setGlobalState((prevState: { myEventsList: [TattooEvent] }) => ({
         ...prevState,
         myEventsList: [...prevState.myEventsList, newEvent],
         allowSite: true,
       }));
 
       Cookies.set("allow-site", JSON.stringify("true"));
+
+      notify("success", "Horario agendado!");
+
       //router.push("/dashboard/site");
     } else {
-      alert("Horario no disponible");
+      notify("error", "Horario no disponible");
     }
   };
 
@@ -93,13 +70,12 @@ export default function DateSelector() {
   };
 
   const handleHour = (e: any) => {
-    setHour(e.target.value);
+    setStringHour(e.target.value);
   };
 
   const handleMonth = (e: any) => {
     setMonthValue(e.target.value);
-
-    setMonthIndex(e.target.selectedIndex);
+    setMonthNumber(nameMonthToNumber(e.target.value));
   };
 
   return (
@@ -122,7 +98,7 @@ export default function DateSelector() {
         onChange={(e) => handleMonth(e)}
       >
         {months.map((month) => (
-          <option key={month.index}>{month.date}</option>
+          <option key={month.number}>{month.date}</option>
         ))}
       </select>
 
@@ -154,7 +130,7 @@ export default function DateSelector() {
       <select
         id="hours"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        value={hour}
+        value={stringHour}
         onChange={(e) => handleHour(e)}
       >
         {hours.map((hour) => (
