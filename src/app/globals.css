@@ -34,6 +34,10 @@ body {
 }
 
 @media (max-width: 767px) {
+  .hidden-indications {
+    display: none;
+  }
+
   /* Estilos para dispositivos móviles */
   .head {
     top: 25px;
@@ -41,6 +45,86 @@ body {
     width: 80px;
     height: 70px;
     border: 2px solid red;
+  }
+
+  .right-arm {
+    top: 100px;
+    left: 75px;
+    width: 30px;
+    height: 105px;
+    border: 2px solid green;
+  }
+
+  .left-arm {
+    top: 175px;
+    left: 1025px;
+    width: 70px;
+    height: 170px;
+    border: 2px solid green;
+  }
+
+  .right-leg {
+    top: 350px;
+    left: 910px;
+    width: 60px;
+    height: 250px;
+    border: 2px solid blue;
+  }
+
+  .left-leg {
+    top: 350px;
+    left: 980px;
+    width: 60px;
+    height: 250px;
+    border: 2px solid blue;
+  }
+
+  .right-foot {
+    top: 602px;
+    left: 910px;
+    width: 60px;
+    height: 55px;
+    border: 2px solid black;
+  }
+
+  .left-foot {
+    top: 602px;
+    left: 980px;
+    width: 60px;
+    height: 55px;
+    border: 2px solid black;
+  }
+
+  .right-hand {
+    top: 350px;
+    left: 860px;
+    width: 45px;
+    height: 70px;
+    border: 2px solid orange;
+  }
+
+  .left-hand {
+    top: 350px;
+    left: 1045px;
+    width: 45px;
+    height: 70px;
+    border: 2px solid orange;
+  }
+
+  .chest {
+    top: 175px;
+    left: 925px;
+    width: 95px;
+    height: 80px;
+    border: 2px solid white;
+  }
+
+  .stomach {
+    top: 265px;
+    left: 925px;
+    width: 95px;
+    height: 80px;
+    border: 2px solid pink;
   }
 }
 
@@ -69,11 +153,91 @@ body {
 @media (min-width: 1280px) {
   /* Estilos para pantallas de escritorio grandes */
   .head {
-    top: 70px;
-    left: 505px;
+    top: 60px;
+    left: 900px;
     width: 140px;
-    height: 130px;
+    height: 100px;
     border: 2px solid red;
+  }
+
+  .right-arm {
+    top: 175px;
+    left: 850px;
+    width: 70px;
+    height: 170px;
+    border: 2px solid green;
+  }
+
+  .left-arm {
+    top: 175px;
+    left: 1025px;
+    width: 70px;
+    height: 170px;
+    border: 2px solid green;
+  }
+
+  .right-leg {
+    top: 350px;
+    left: 910px;
+    width: 60px;
+    height: 250px;
+    border: 2px solid blue;
+  }
+
+  .left-leg {
+    top: 350px;
+    left: 980px;
+    width: 60px;
+    height: 250px;
+    border: 2px solid blue;
+  }
+
+  .right-foot {
+    top: 602px;
+    left: 910px;
+    width: 60px;
+    height: 55px;
+    border: 2px solid black;
+  }
+
+  .left-foot {
+    top: 602px;
+    left: 980px;
+    width: 60px;
+    height: 55px;
+    border: 2px solid black;
+  }
+
+  .right-hand {
+    top: 350px;
+    left: 860px;
+    width: 45px;
+    height: 70px;
+    border: 2px solid orange;
+  }
+
+  .left-hand {
+    top: 350px;
+    left: 1045px;
+    width: 45px;
+    height: 70px;
+    border: 2px solid orange;
+  }
+
+  .chest {
+    top: 175px;
+    left: 925px;
+    width: 95px;
+    height: 80px;
+    border: 2px solid white;
+  }
+
+  .stomach {
+    top: 265px;
+    left: 925px;
+    width: 95px;
+    height: 80px;
+    border: 2px solid pink;
   }
 }
 
@@ -81,12 +245,12 @@ body {
 .body-container {
   position: relative;
   width: 100%;
-  height: 100vh; /* Ajusta según sea necesario */
+  height: 100vh; /* Ajusta segun sea necesario */
   overflow: auto;
 }
 .body-container img {
-  max-width: 80%; /* La imagen no será más ancha que el ancho del viewport */
-  max-height: 90vh; /* La imagen no será más alta que la altura del viewport */
+  max-width: 80%; /* La imagen no sera mas ancha que el ancho del viewport */
+  max-height: 90vh; /* La imagen no sera mas alta que la altura del viewport */
   display: block; /* Asegura que la imagen se comporte como un bloque */
   margin: auto; /* Centra la imagen horizontalmente */
   border-radius: 20px;
@@ -95,38 +259,6 @@ body {
   position: absolute;
   cursor: pointer;
   opacity: 0.5;
-}
-/* .head {
-  top: 90px;
-  left: 505px;
-  width: 140px;
-  height: 130px;
-  border: 2px solid red;
-} */
-.left-arm {
-  top: 200px;
-  left: 400px;
-  width: 80px;
-  height: 150px;
-  border: 2px solid green;
-}
-.right-arm {
-  top: 120px;
-  left: 230px;
-  width: 60px;
-  height: 100px;
-}
-.left-leg {
-  top: 300px;
-  left: 80px;
-  width: 60px;
-  height: 120px;
-}
-.right-leg {
-  top: 300px;
-  left: 160px;
-  width: 60px;
-  height: 120px;
 }
 
 .disabled-link {

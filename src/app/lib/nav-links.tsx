@@ -13,12 +13,12 @@ import { useGlobalState } from "../context/GlobalState";
 
 // Para agregar un linu nuevo al nav bar solo agregr un item en links
 const links = [
-  { name: "Home", href: "/dashboard", icon: HomeIcon },
-  { name: "Invoices", href: "/dashboard/invoices", icon: DocumentIcon },
-  { name: "Customers", href: "/dashboard/customers", icon: CogIcon },
-  { name: "Calendar", href: "/dashboard/calendar", icon: CalendarIcon },
-  { name: "Site tattoo", href: "/dashboard/site", icon: UserIcon },
-  { name: "Size tattoo", href: "/dashboard/size", icon: AdjustmentsIcon },
+  { name: "Inicio", href: "/dashboard", icon: HomeIcon },
+  // { name: "Facturas", href: "/dashboard/invoices", icon: DocumentIcon },
+  // { name: "Clientes", href: "/dashboard/customers", icon: CogIcon },
+  { name: "Calendario", href: "/dashboard/calendar", icon: CalendarIcon },
+  { name: "Lugar tattoo", href: "/dashboard/site", icon: UserIcon },
+  { name: "Tamañp tattoo", href: "/dashboard/size", icon: AdjustmentsIcon },
   { name: "Sign out", href: "/dashboard/signout", icon: LogoutIcon },
 ];
 

@@ -1,12 +1,25 @@
-import Calendar from "@/app/components/Calendar";
+"use client";
+import DateSelector from "@/app/components/DateSelector";
+import MyCalendar from "@/app/components/MyCalendar";
+import dayjs from "dayjs";
+import { useEffect } from "react";
 
-export default function Page() {
+function page() {
+  useEffect(() => {
+    // const day1 = dayjs("2024-08-18T12:00:00").toDate();
+    // const day2 = dayjs("2024-07-18T12:00:00").toDate();
+    // console.log(day1.getTime() === day2.getTime());
+  }, []);
+
   return (
-    <div className="flex justify-center mt-10 min-h-screen">
-      <div className="w-full max-w-lg p-4 text-center">
-        <p className="text-2xl mb-6">Seleccione fecha y hora de la session</p>
-        <Calendar />
+    <div className="flex justify-around mx-10 mt-10">
+      <div className="mt-20">
+        <DateSelector />
       </div>
+
+      <MyCalendar />
     </div>
   );
 }
+
+export default page;
