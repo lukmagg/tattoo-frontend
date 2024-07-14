@@ -6,8 +6,8 @@ function Indications() {
       <p className="text-center leading-loose">
         El sistema generara un presupuesto
       </p>
-      <p className="text-center leading-loose">aproximado...</p>
-      <p className="text-center leading-loose">Siga las indicaciones</p>
+      <p className="text-center leading-loose">aproximado</p>
+      <p className="text-center leading-loose">Siga las indicaciones...</p>
       <p className="text-center leading-loose">
         1. Seleccione el lugar del tattoo
       </p>

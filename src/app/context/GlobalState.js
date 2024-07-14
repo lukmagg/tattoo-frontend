@@ -1,16 +1,15 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 import dayjs from "dayjs";
 
-// Crear el contexto
+// Context
 const GlobalStateContext = createContext();
 
-// Crear un proveedor para el contexto
+// Context provider
 export const GlobalStateProvider = ({ children }) => {
   const [globalState, setGlobalState] = useState({
-    nextTab: false, // Define aquí tus estados iniciales
-    tattooPlace: "original",
-    tattooDate: "",
+    nextTab: false, // Initial state
+    tattooPlace: "",
     allowSite: false,
     allowSize: false,
     myEventsList: [
@@ -39,5 +38,5 @@ export const GlobalStateProvider = ({ children }) => {
   );
 };
 
-// Crear un hook para usar el contexto fácilmente
+// Crear un hook para usar el contexto facilmente
 export const useGlobalState = () => useContext(GlobalStateContext);
