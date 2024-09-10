@@ -37,3 +37,8 @@ export interface TattooEvent {
   end: Date;
   title: string;
 }
+
+// Custom types
+
+export type OnRequestCloseType = () => void;
+export type OnCancelType = () => void;

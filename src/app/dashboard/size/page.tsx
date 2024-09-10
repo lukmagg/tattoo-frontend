@@ -3,9 +3,13 @@ import SizeSelector from "@/app/components/SizeSelector";
 
 export default function Page() {
   return (
-    <div className="flex flex-col justify-center mt-10">
-      <SizeIndication />
-      <SizeSelector />
+    <div className="flex flex-col">
+      <div className="mt-20">
+        <SizeIndication />
+      </div>
+      <div className="mt-10">
+        <SizeSelector />
+      </div>
     </div>
   );
 }

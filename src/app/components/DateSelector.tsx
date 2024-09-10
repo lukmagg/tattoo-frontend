@@ -10,6 +10,7 @@ import dayjs, { Dayjs } from "dayjs";
 import notify from "../lib/utils/Notifications";
 import nameMonthToNumber from "../lib/utils/nameMonthToNumber";
 import { TattooEvent, hours, months } from "../constants";
+import ContactModal from "./ContactModal";
 
 const days = Array.from({ length: 30 }, (_, i) => ({
   date: (i + 1).toString(),
@@ -33,6 +34,13 @@ export default function DateSelector() {
 
   const [date, setDate] = useState<Dayjs>(dayjs());
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
+
+
   useEffect(() => {
     const { HH, mm } = hourFormatter(stringHour);
     setHour(HH);
@@ -52,14 +60,14 @@ export default function DateSelector() {
       setGlobalState((prevState: { myEventsList: [TattooEvent] }) => ({
         ...prevState,
         myEventsList: [...prevState.myEventsList, newEvent],
-        allowSite: true,
+        allowContact: true,
       }));
 
-      Cookies.set("allow-site", JSON.stringify("true"));
+      Cookies.set("allow-form-contact", JSON.stringify("true"));
 
       notify("success", "Horario agendado!");
 
-      //router.push("/dashboard/site");
+      openModal();
     } else {
       notify("error", "Horario no disponible");
     }
@@ -79,7 +87,11 @@ export default function DateSelector() {
   };
 
   return (
-    <div>
+    <>
+      <ContactModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+      />
       <div className="text-3xl m-auto mb-10 flex-1 hidden-indications">
         <p className="text-center leading-loose">Seleccione una fecha</p>
       </div>
@@ -145,6 +157,6 @@ export default function DateSelector() {
       >
         Next
       </button>
-    </div>
+    </>
   );
 }

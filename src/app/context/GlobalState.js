@@ -9,9 +9,13 @@ const GlobalStateContext = createContext();
 export const GlobalStateProvider = ({ children }) => {
   const [globalState, setGlobalState] = useState({
     nextTab: false, // Initial state
+    logged: false,
     tattooPlace: "",
-    allowSite: false,
+    tattooSize: "",
+    allowSite: true,
     allowSize: false,
+    allowCalendar: false,
+    allowContact: true,
     myEventsList: [
       {
         start: dayjs("2024-07-18T11:00:00").toDate(),
@@ -19,8 +23,8 @@ export const GlobalStateProvider = ({ children }) => {
         title: "tattoo 1",
       },
       {
-        start: dayjs("2024-07-23T06:00:00").toDate(),
-        end: dayjs("2024-07-23T09:00:00").toDate(),
+        start: dayjs("2024-07-23T08:00:00").toDate(),
+        end: dayjs("2024-07-23T10:00:00").toDate(),
         title: "tattoo 2",
       },
       {

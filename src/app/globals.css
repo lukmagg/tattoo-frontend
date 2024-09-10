@@ -173,7 +173,7 @@ body {
     left: 1025px;
     width: 70px;
     height: 170px;
-    border: 2px solid green;
+   /* border: 2px solid green; */ 
   }
 
   .right-leg {
@@ -189,7 +189,7 @@ body {
     left: 980px;
     width: 60px;
     height: 250px;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
   }
 
   .right-foot {
@@ -197,7 +197,7 @@ body {
     left: 910px;
     width: 60px;
     height: 55px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
   }
 
   .left-foot {
@@ -205,7 +205,7 @@ body {
     left: 980px;
     width: 60px;
     height: 55px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
   }
 
   .right-hand {
@@ -213,7 +213,7 @@ body {
     left: 860px;
     width: 45px;
     height: 70px;
-    border: 2px solid orange;
+    /* border: 2px solid orange; */
   }
 
   .left-hand {
@@ -221,7 +221,7 @@ body {
     left: 1045px;
     width: 45px;
     height: 70px;
-    border: 2px solid orange;
+    /* border: 2px solid orange; */
   }
 
   .chest {
@@ -229,7 +229,7 @@ body {
     left: 925px;
     width: 95px;
     height: 80px;
-    border: 2px solid white;
+    /* border: 2px solid white; */
   }
 
   .stomach {
@@ -237,7 +237,7 @@ body {
     left: 925px;
     width: 95px;
     height: 80px;
-    border: 2px solid pink;
+    /* border: 2px solid pink; */
   }
 }
 

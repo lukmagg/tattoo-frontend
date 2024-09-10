@@ -1,25 +1,33 @@
 import {
   HomeIcon,
   UserIcon,
-  CogIcon,
   LogoutIcon,
   DocumentIcon,
+  CogIcon,
   CalendarIcon,
   AdjustmentsIcon,
+  MailIcon,
+  LoginIcon,
 } from "@heroicons/react/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useGlobalState } from "../context/GlobalState";
 
-// Para agregar un linu nuevo al nav bar solo agregr un item en links
 const links = [
+  // { name: "User", href: "/dashboard/profile-client", icon: CalendarIcon },
+
   { name: "Inicio", href: "/dashboard", icon: HomeIcon },
+  { name: "Lugar tattoo", href: "/dashboard/site", icon: UserIcon },
+  { name: "Tamaño tattoo", href: "/dashboard/size", icon: AdjustmentsIcon },
+  { name: "Artista", href: "/dashboard/artist", icon: CalendarIcon },
+
+  { name: "Calendario", href: "/dashboard/calendar", icon: CalendarIcon },
+
   // { name: "Facturas", href: "/dashboard/invoices", icon: DocumentIcon },
   // { name: "Clientes", href: "/dashboard/customers", icon: CogIcon },
-  { name: "Calendario", href: "/dashboard/calendar", icon: CalendarIcon },
-  { name: "Lugar tattoo", href: "/dashboard/site", icon: UserIcon },
-  { name: "Tamañp tattoo", href: "/dashboard/size", icon: AdjustmentsIcon },
-  { name: "Sign out", href: "/dashboard/signout", icon: LogoutIcon },
+  { name: "Sign out", href: "/logout", icon: LogoutIcon },
+  { name: "Sign in", href: "/login", icon: LoginIcon },
+
 ];
 
 export default function NavLinks() {
@@ -43,6 +51,15 @@ export default function NavLinks() {
           case "/dashboard/size":
             allow = globalState.allowSize === true ? "" : "disabled-link";
             break;
+          case "/dashboard/calendar":
+            allow = globalState.allowCalendar === true ? "" : "disabled-link";
+            break;
+          case "/login":
+            allow = globalState.logged === true ? "hidden" : "";
+            break;
+          case "/logout":
+            allow = globalState.logged === false ? "hidden" : "";
+            break;
           default:
             allow = "";
         }
@@ -51,7 +68,7 @@ export default function NavLinks() {
           <Link
             key={link.name}
             href={link.href}
-            className={`p-4 hover:bg-gray-700 flex items-center ${active} ${allow}`}
+            className={`p-4 hover:bg-gray-700 flex items-center ${active} ${allow} text-xl font-semibold`}
           >
             <LinkIcon className="h-5 w-5 mr-2" />
             {link.name}

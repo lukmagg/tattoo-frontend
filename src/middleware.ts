@@ -5,23 +5,22 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   let allowSite = request.cookies.get("allow-site");
   let allowSize = request.cookies.get("allow-size");
+  let allowCalendar = request.cookies.get("allow-calendar");
 
-  if (request.nextUrl.pathname.endsWith("site")) {
-    if (!allowSite?.value) {
-      return NextResponse.redirect(new URL("/dashboard/calendar", request.url));
+  if (request.nextUrl.pathname.endsWith("size")) {
+    if (!allowSize?.value) {
+      return NextResponse.redirect(new URL("/dashboard/site", request.url));
     } else {
       return NextResponse.next();
     }
   }
 
-  if (request.nextUrl.pathname.endsWith("size")) {
-    if (!allowSize?.value) {
-      if (!allowSite?.value) {
-        return NextResponse.redirect(
-          new URL("/dashboard/calendar", request.url)
-        );
-      } else {
+  if (request.nextUrl.pathname.endsWith("calendar")) {
+    if (!allowCalendar?.value) {
+      if (!allowSize?.value) {
         return NextResponse.redirect(new URL("/dashboard/site", request.url));
+      } else {
+        return NextResponse.redirect(new URL("/dashboard/size", request.url));
       }
     } else {
       return NextResponse.next();
