@@ -6,6 +6,7 @@ import { GlobalStateProvider } from "@/app/context/GlobalState";
 import Modal from "react-modal";
 import { useEffect } from "react";
 // import { Metadata } from "next";
+import { ApolloWrapper } from './../lib/apollo-provider.js'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,9 +30,11 @@ export default function RootLayout({
       <GlobalStateProvider>
         <html lang="en">
           <body className={inter.className}>
-            <div id="__next">
-              {children}
-            </div>
+            <ApolloWrapper>
+              <div id="__next">
+                {children}
+              </div>
+            </ApolloWrapper>
           </body>
         </html>
       </GlobalStateProvider>

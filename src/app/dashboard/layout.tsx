@@ -9,14 +9,9 @@ import Footer from "../components/Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    // Obtener todas las cookies
-    const allCookies = Cookies.get();
-
-    // Borrar todas las cookies
-    Object.keys(allCookies).forEach((cookieName) => {
-      Cookies.remove(cookieName);
-    });
+    // borrar las cookies pero no el token
   }, []);
+
   return (
     <div className="flex flex-col h-screen md:flex-row md:overflow-hidden">
       <SideNav />

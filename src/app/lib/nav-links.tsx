@@ -1,3 +1,4 @@
+'use client'
 import {
   HomeIcon,
   UserIcon,
@@ -12,6 +13,10 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useGlobalState } from "../context/GlobalState";
+import { useRouter } from "next/navigation";
+import Cookies from 'universal-cookie';
+import { useEffect, useState } from "react";
+
 
 const links = [
   // { name: "User", href: "/dashboard/profile-client", icon: CalendarIcon },
@@ -32,10 +37,38 @@ const links = [
 
 export default function NavLinks() {
   const { globalState, setGlobalState } = useGlobalState();
+  const [mounted, setMounted] = useState(false);
+
+  const router = useRouter();
 
   const pathname = usePathname();
+  const cookies = new Cookies();
+
+
+  // Asegura que el componente se ha montado
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   let allow = "";
+
+  const token = cookies.get('token')
+
+  let isLogged = false
+
+  if (token) {
+    isLogged = true
+  }
+
+  const handleLogout = () => {
+    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    router.push("/login");
+  };
+
+  if (!mounted) {
+    // Mientras no esté montado, no aplicamos clases condicionales
+    return null;
+  }
 
   return (
     <>
@@ -55,16 +88,26 @@ export default function NavLinks() {
             allow = globalState.allowCalendar === true ? "" : "disabled-link";
             break;
           case "/login":
-            allow = globalState.logged === true ? "hidden" : "";
+            allow = isLogged === true ? "hidden" : "";
             break;
           case "/logout":
-            allow = globalState.logged === false ? "hidden" : "";
+            allow = isLogged === true ? "" : "hidden";
             break;
           default:
             allow = "";
         }
 
-        return (
+        return link.href === "/logout" ? (
+          // Llama a handleLogout si el link es "Sign out"
+          <button
+            key={link.name}
+            onClick={handleLogout}
+            className={`p-4 hover:bg-gray-700 flex items-center ${allow} text-xl font-semibold`}
+          >
+            <LinkIcon className="h-5 w-5 mr-2" />
+            {link.name}
+          </button>
+        ) : (
           <Link
             key={link.name}
             href={link.href}

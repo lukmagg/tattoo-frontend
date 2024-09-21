@@ -38,6 +38,13 @@ export interface TattooEvent {
   title: string;
 }
 
+export interface DecodedToken {
+  id: string;
+  roles: [string];
+  iat: number;
+  exp: number;
+}
+
 // Custom types
 
 export type OnRequestCloseType = () => void;

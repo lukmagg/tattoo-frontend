@@ -1,15 +1,29 @@
 "use client";
 import { createContext, useContext, useState } from "react";
 import dayjs from "dayjs";
+import Cookies from 'universal-cookie';
 
 // Context
 const GlobalStateContext = createContext();
 
 // Context provider
 export const GlobalStateProvider = ({ children }) => {
+ 
+  const cookies = new Cookies();
+ 
+  const token = cookies.get('token')
+
+  let isLogged = false
+
+  if(token){
+    isLogged = true
+  }
+  
+
+
   const [globalState, setGlobalState] = useState({
+    logged: isLogged,
     nextTab: false, // Initial state
-    logged: false,
     tattooPlace: "",
     tattooSize: "",
     allowSite: true,
