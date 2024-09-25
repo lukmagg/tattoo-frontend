@@ -50,16 +50,16 @@ export default function DateSelector() {
   }, [stringHour, day, hour, minutes, monthNumber]);
 
   const handleClick = () => {
-    if (dateIsDisponible(globalState.myEventsList, date)) {
+    if (dateIsDisponible(globalState.myEventList, date)) {
       const newEvent = {
         start: date.toDate(),
         end: date.add(2, "hour").toDate(),
         title: "tattoo 4",
       };
 
-      setGlobalState((prevState: { myEventsList: [TattooEvent] }) => ({
+      setGlobalState((prevState: { myEventList: [TattooEvent] }) => ({
         ...prevState,
-        myEventsList: [...prevState.myEventsList, newEvent],
+        myEventList: [...prevState.myEventList, newEvent],
         allowContact: true,
       }));
 

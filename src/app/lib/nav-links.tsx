@@ -87,6 +87,9 @@ export default function NavLinks() {
           case "/dashboard/calendar":
             allow = globalState.allowCalendar === true ? "" : "disabled-link";
             break;
+          case "/dashboard/artist":
+            allow = globalState.allowArtist === true ? "" : "disabled-link";
+            break;
           case "/login":
             allow = isLogged === true ? "hidden" : "";
             break;

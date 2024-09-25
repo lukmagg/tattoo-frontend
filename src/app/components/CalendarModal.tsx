@@ -4,45 +4,46 @@ import { useGlobalState } from "../context/GlobalState";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Modal from "react-modal";
-import { OnRequestCloseType } from "./../constants";
+import { OnRequestCloseType } from "../constants";
 
-interface BudgetModalProps {
+interface CalendarModalProps {
   isOpen: boolean;
-  selectedSize: string;
+  selectedDay: Date;
   onRequestClose: OnRequestCloseType;
 }
 
-export default function BudgetModal({
+export default function CalendarModal({
   isOpen,
   onRequestClose,
-  selectedSize,
-}: BudgetModalProps) {
+  selectedDay,
+}: CalendarModalProps) {
   const { globalState, setGlobalState } = useGlobalState();
   const [totalPrice, setTotalPrice] = useState(0);
 
-  useEffect(() => {
-    let total = 0;
+  // useEffect(() => {
+  //   let total = 0;
 
-    switch (selectedSize) {
-      case "small":
-        total = 10;
-        break;
-      case "medium":
-        total = 20;
-        break;
-      case "large":
-        total = 50;
-        break;
-    }
-    setTotalPrice(total);
-  }, [selectedSize]);
+  //   switch (selectedDay) {
+  //     case "small":
+  //       total = 10;
+  //       break;
+  //     case "medium":
+  //       total = 20;
+  //       break;
+  //     case "large":
+  //       total = 50;
+  //       break;
+  //   }
+  //   setTotalPrice(total);
+  // }, [selectedDay]);
 
   const router = useRouter();
 
-  const handleAccept = (size: string) => {
-    setGlobalState({ ...globalState, tattooSize: size, allowCalendar: true });
-    Cookies.set("allow-calendar", JSON.stringify("true"));
-    router.push("/dashboard/calendar");
+  const handleAccept = (day: string) => {
+    console.log(day)
+    // setGlobalState({ ...globalState, tattooSize: size, allowCalendar: true });
+    // Cookies.set("allow-calendar", JSON.stringify("true"));
+    // router.push("/dashboard/calendar");
   };
 
   return (
@@ -50,7 +51,7 @@ export default function BudgetModal({
       <Modal
         isOpen={isOpen}
         onRequestClose={onRequestClose}
-        contentLabel="Budget Modal"
+        contentLabel="Calendar Modal"
         style={{
           content: {
             height: "400px",
@@ -69,11 +70,11 @@ export default function BudgetModal({
         <div className="p-4 h-[350px] max-w-sm bg-white shadow dark:bg-gray-800">
           <div className="flex h-full flex-col items-center">
             <div className="grow">
-              <h2 className="text-white">El presupuesto es ${totalPrice}</h2>
+              <h2 className="text-white">Dia seleccionado: {selectedDay.getHours()}</h2>
             </div>
             <div className="">
               <button
-                onClick={() => handleAccept(selectedSize)}
+                onClick={() => handleAccept(selectedDay.getHours().toString())}
                 className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Aceptar

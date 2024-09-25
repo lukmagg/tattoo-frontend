@@ -14,11 +14,11 @@ function page() {
   }, []);
 
   return (
-    <div className="flex justify-around mx-10 mt-20">
+    <div className="flex justify-around mx-10 mt-10">
 
-      <div className="mt-20">
+      {/* <div className="mt-20">
         <DateSelector />
-      </div>
+      </div> */}
 
       <MyCalendar />
     </div>

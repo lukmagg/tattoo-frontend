@@ -12,6 +12,7 @@ export default function Page() {
     Cookies.remove('allow-size')
     Cookies.remove('allow-site')
     Cookies.remove('allow-form-contact')
+    Cookies.remove('allow-artist')
   }, [])
 
   return <div><div className="mt-20 flex flex-col items-center justify-center text-3xl m-auto flex-1 hidden-indications">

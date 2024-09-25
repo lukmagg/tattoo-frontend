@@ -27,6 +27,11 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.rbc-event {
+  background: red !important;
+}
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
