@@ -33,9 +33,9 @@ export const months = [
 ];
 
 export interface TattooEvent {
+  title: string;
   start: Date;
   end: Date;
-  title: string;
 }
 
 export interface DecodedToken {

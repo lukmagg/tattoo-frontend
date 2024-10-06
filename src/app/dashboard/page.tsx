@@ -1,6 +1,6 @@
 'use client'
-import Cookies from "js-cookie";
-import { useEffect } from "react";
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
 
 export default function Page() {
 
@@ -15,11 +15,11 @@ export default function Page() {
     Cookies.remove('allow-artist')
   }, [])
 
-  return <div><div className="mt-20 flex flex-col items-center justify-center text-3xl m-auto flex-1 hidden-indications">
-    <p className="text-center leading-loose">
+  return <div><div className='mt-20 flex flex-col items-center justify-center text-3xl m-auto flex-1 hidden-indications'>
+    <p className='text-center leading-loose'>
       El sistema generara un presupuesto
     </p>
-    <p className="text-center leading-loose">"aproximado"</p>
-    <p className="text-center leading-loose">Siga las indicaciones...</p>
+    <p className='text-center leading-loose'>aproximado</p>
+    <p className='text-center leading-loose'>Siga las indicaciones...</p>
   </div></div>;
 }

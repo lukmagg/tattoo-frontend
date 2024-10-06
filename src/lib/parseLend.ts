@@ -1,4 +1,4 @@
-import { Lend } from '@/src/Constants';
+import { Lend } from './../Constants';
 
 export function parseLend(value: string): Lend | undefined {
   switch (value) {

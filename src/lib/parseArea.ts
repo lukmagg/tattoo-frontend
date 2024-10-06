@@ -1,4 +1,4 @@
-import { Area } from '@/src/Constants';
+import { Area } from './../Constants';
 
 export function parseArea(value: string): Area | undefined {
   switch (value) {

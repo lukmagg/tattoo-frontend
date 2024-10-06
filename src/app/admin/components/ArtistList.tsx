@@ -26,7 +26,15 @@ const cardsData = [
     },
 ];
 
-const Card = ({ name, description, instagram, color, onClose }) => {
+interface CardProps {
+    name: string;
+    description: string;
+    instagram: string;
+    color: string;
+    onClose: () => void; // Si 'onClose' es una función sin retorno
+}
+
+const Card: React.FC<CardProps> = ({ name, description, instagram, color, onClose }) => {
     return (
         <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg mx-10 mb-4 relative flex flex-col">
             {/* Cruz para cerrar la card */}

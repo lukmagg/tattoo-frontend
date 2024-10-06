@@ -1,4 +1,4 @@
-import { TypeUser } from '@/src/Constants';
+import { TypeUser } from '../Constants';
 
 export function parseTypeUser(value: string): TypeUser {
   switch (value) {

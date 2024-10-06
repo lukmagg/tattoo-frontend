@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from 'react';
 import { Navigation, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperType } from 'swiper';
+
 import Cookies from "js-cookie";
 
 // Import Swiper styles
@@ -38,7 +40,7 @@ const CarouselBodyParts = () => {
         router.push("/dashboard/size");
     };
 
-    const handleSlideChange = (swiper) => {
+    const handleSlideChange = (swiper: SwiperType) => {
         setActiveIndex(swiper.activeIndex);
     };
 

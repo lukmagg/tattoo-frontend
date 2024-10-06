@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, dayjsLocalizer } from "react-big-calendar";
+import { Calendar, dayjsLocalizer, SlotInfo } from "react-big-calendar";
 import dayjs from "dayjs";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useGlobalState } from "../context/GlobalState";
@@ -8,11 +8,11 @@ import { TattooEvent } from "../constants";
 import { useState } from "react";
 import CalendarModal from "./CalendarModal";
 
-interface SlotCalendar {
-  start: Date;
-  end: Date;
-  title: string;
-}
+// interface SlotCalendar {
+//   start: Date;
+//   end: Date;
+//   title: string;
+// }
 
 dayjs.locale("es");
 const localizer = dayjsLocalizer(dayjs);
@@ -27,7 +27,7 @@ function MyCalendar() {
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
 
-  const handleSelectEvent = (event) => {
+  const handleSelectEvent = (event: TattooEvent) => {
     setDate(event.start)
     setView("day")
 
@@ -41,7 +41,7 @@ function MyCalendar() {
 
   };
 
-  const handleSelectSlot = ({ start, end, title }: SlotCalendar) => {
+  const handleSelectSlot = ({ start, end }: SlotInfo) => {
     start.setHours(14)
 
     end = dayjs(start).add(2, 'hour').toDate();
@@ -63,7 +63,7 @@ function MyCalendar() {
       title: `${startHour}hs / ${endHour}hs`,
     };
 
-    setGlobalState((prevState: { myEventList: [TattooEvent] }) => ({
+    setGlobalState((prevState: { myEventList: TattooEvent[] }) => ({
       ...prevState,
       myEventList: [...prevState.myEventList, newEvent],
       //allowContact: true,
@@ -72,8 +72,8 @@ function MyCalendar() {
 
   };
 
-  const components = {
-    event: props => {
+  const eventComponent = {
+    event: (props: TattooEvent) => {
       return <div className="bg-red-500">
         {props.title}
       </div>
@@ -104,11 +104,11 @@ function MyCalendar() {
           view={view}
           onView={handleOnView}
           formats={{
-            dayHeaderFormat: (date) => {
+            dayHeaderFormat: (date: Date) => {
               return dayjs(date).format("DD/MM/YYYY");
             },
           }}
-          components={components}
+          //components={eventComponent}
           onNavigate={(newDate) => {
             // Esto permite que los botones Today, Next, y Back actualicen la fecha
             setDate(newDate);
