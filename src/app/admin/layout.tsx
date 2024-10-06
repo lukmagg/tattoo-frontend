@@ -1,14 +1,14 @@
 "use client";
-import SideNav from "../components/SideNav";
 import { ToastContainer } from "react-toastify";
 import { Suspense } from "react";
 import Loading from "../dashboard/loading";
+import SideNavAdmin from "../components/SideNavAdmin";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-      <SideNav />
+      <SideNavAdmin />
       <ToastContainer
         position="top-right"
         autoClose={5000}

@@ -1,16 +1,18 @@
-"use client";
-import { useState } from "react";
-import BudgetModal from "./BudgetModal";
+"use client"
+import { useState } from "react"
+import BudgetModal from "./BudgetModal"
+import Link from "next/link"
 
 const ArtistSelector = () => {
-  const [selectedSize, setSelectedSize] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedArtist, setSelectedArtist] = useState("")
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
-  const openModal = () => setModalIsOpen(true);
-  const closeModal = () => setModalIsOpen(false);
+  const openModal = () => setModalIsOpen(true)
+  const closeModal = () => setModalIsOpen(false)
 
-  const handleSizeChange = (size: string) => {
-    setSelectedSize(size);
+  const handleArtistChange = (artist: string) => {
+    setSelectedArtist(artist)
+    openModal()
   };
 
 
@@ -19,38 +21,142 @@ const ArtistSelector = () => {
       <BudgetModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        selectedSize={selectedSize}
+        selectedSize={selectedArtist}
       />
-      <div className="flex flex-col w-[32rem] m-auto pb-10 mt-10">
-        <p className="">Pequeño: 5 cm x 10 cm</p>
-        <button
-          onClick={() => handleSizeChange("small")}
-          className="mt-2 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-400 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-        >
-          Pequeño
-        </button>
-        <p className="mt-5">Mediano: 15 cm x 30 cm</p>
-        <button
-          onClick={() => handleSizeChange("medium")}
-          className="mt-2 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-400 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-        >
-          Mediano
-        </button>
-        <p className="mt-5">Grande: 35 cm x 50 cm</p>
-        <button
-          onClick={() => handleSizeChange("large")}
-          className="mt-2 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-400 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-        >
-          Grande
-        </button>
-        <button
-          type="button"
-          className="w-full mt-20 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-          onClick={openModal}
-        >
-          Next
-        </button>
+      <div className="flex flex-col items-center h-screen">
+        <div className="flex">
+          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white mr-8">
+            {/* <img
+              className="w-full"
+              src="https://via.placeholder.com/400x200"
+              alt="Imagen de ejemplo"
+            /> */}
+            <div className="px-6 py-4">
+              <div className="text-gray-800 font-bold text-xl mb-2">Mauro Lanza</div>
+              <p className="text-gray-700 text-base">
+                Tatuador local de Ushuaia, el mas crack! con un estilo muy harcord..
+                Skater nato!
+                y mas cosas que quieras poner del artista para rellenar la card.
+              </p>
+            </div>
+            <div className="px-6 pt-4 pb-2">
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                <Link legacyBehavior href="https://www.instagram.com/luk_magg/" passHref><a target="_blank" rel="noopener noreferrer">
+                  Instagram
+                </a></Link>
+              </span>
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                <Link legacyBehavior href="https://www.instagram.com/luk_magg/" passHref><a target="_blank" rel="noopener noreferrer">
+                  Facebook
+                </a></Link>
+              </span>
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                <Link legacyBehavior href="https://www.instagram.com/luk_magg/" passHref><a target="_blank" rel="noopener noreferrer">
+                  Tiktok
+                </a></Link>
+              </span>
+            </div>
+            <div onClick={() => handleArtistChange("artista 1")} className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer">
+              <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">Seleccionar</button>
+            </div>
+          </div>
+
+          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+            {/* <img
+              className="w-full"
+              src="https://via.placeholder.com/400x200"
+              alt="Imagen de ejemplo"
+            /> */}
+            <div className="px-6 py-4">
+              <div className="text-gray-800 font-bold text-xl mb-2">Nombre artista</div>
+              <p className="text-gray-700 text-base">
+                Aquí va una breve descripción del contenido de la tarjeta. Puedes agregar
+                más información o personalizarlo según lo que necesites.
+              </p>
+            </div>
+            <div className="px-6 pt-4 pb-2">
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                #Etiqueta1
+              </span>
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                <Link legacyBehavior href="https://www.instagram.com/luk_magg/" passHref><a target="_blank" rel="noopener noreferrer">
+                  Instagram
+                </a></Link>
+              </span>
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                #Etiqueta3
+              </span>
+            </div>
+            <div onClick={() => handleArtistChange("artista 1")} className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer">
+              <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">Seleccionar</button>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex mt-8">
+          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white mr-8">
+            {/* <img
+              className="w-full"
+              src="https://via.placeholder.com/400x200"
+              alt="Imagen de ejemplo"
+            /> */}
+            <div className="px-6 py-4">
+              <div className="text-gray-800 font-bold text-xl mb-2">Nombre artista</div>
+              <p className="text-gray-700 text-base">
+                Aquí va una breve descripción del contenido de la tarjeta. Puedes agregar
+                más información o personalizarlo según lo que necesites.
+              </p>
+            </div>
+            <div className="px-6 pt-4 pb-2">
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                #Etiqueta1
+              </span>
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                <Link legacyBehavior href="https://www.instagram.com/luk_magg/" passHref><a target="_blank" rel="noopener noreferrer">
+                  Instagram
+                </a></Link>
+              </span>
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                #Etiqueta3
+              </span>
+            </div>
+            <div onClick={() => handleArtistChange("artista 1")} className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer">
+              <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">Seleccionar</button>
+            </div>
+          </div>
+          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+            {/* <img
+              className="w-full"
+              src="https://via.placeholder.com/400x200"
+              alt="Imagen de ejemplo"
+            /> */}
+            <div className="px-6 py-4">
+              <div className="text-gray-800 font-bold text-xl mb-2">Nombre artista</div>
+              <p className="text-gray-700 text-base">
+                Aquí va una breve descripción del contenido de la tarjeta. Puedes agregar
+                más información o personalizarlo según lo que necesites.
+              </p>
+            </div>
+            <div className="px-6 pt-4 pb-2">
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                #Etiqueta1
+              </span>
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                <Link legacyBehavior href="https://www.instagram.com/luk_magg/" passHref><a target="_blank" rel="noopener noreferrer">
+                  Instagram
+                </a></Link>
+              </span>
+              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                #Etiqueta3
+              </span>
+            </div>
+            <div onClick={() => handleArtistChange("artista 1")} className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer">
+              <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">Seleccionar</button>
+            </div>
+          </div>
+        </div>
       </div>
+
     </>
   );
 };

@@ -41,9 +41,10 @@ function MyCalendar() {
 
   };
 
-  const handleSelectSlot = ({ start }: SlotCalendar) => {
+  const handleSelectSlot = ({ start, end, title }: SlotCalendar) => {
+    start.setHours(14)
 
-    const end = dayjs(start).add(2, 'hour').toDate();
+    end = dayjs(start).add(2, 'hour').toDate();
 
     const startHour = start.getHours()
     const startMin = start.getMinutes()
@@ -52,7 +53,7 @@ function MyCalendar() {
     const endMin = end.getMinutes()
 
     // TODO: preguntar al cliente si quiere reservar en tal fecha,
-    // si elije que si agendar, si elige que no, no agendar y volver al calendario.
+    // si elije que si, enviar OTP luego, agendar, si elige que no, no agendar y volver al calendario.
     // openModal()
 
 

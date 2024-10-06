@@ -7,7 +7,7 @@ export default function Page() {
             <div className="mt-20">
                 <ArtistIndication />
             </div>
-            <div className="mt-10">
+            <div className="mt-12">
                 <ArtistSelector />
             </div>
         </div>
