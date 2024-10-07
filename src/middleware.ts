@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  if (request.nextUrl.pathname.endsWith("/dashboard/calendar")) {
+  if (request.nextUrl.pathname.endsWith("calendar")) {
     if (!allowCalendar?.value) {
       if (!allowSize?.value) {
         return NextResponse.redirect(new URL("/dashboard/site", request.url));
