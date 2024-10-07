@@ -63,7 +63,7 @@ export default function DateSelector() {
         allowContact: true,
       }));
 
-      Cookies.set("allow-form-contact", JSON.stringify("true"));
+      Cookies.set("allow-form-contact", '1');
 
       notify("success", "Horario agendado!");
 

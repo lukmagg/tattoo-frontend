@@ -41,7 +41,7 @@ export default function BudgetModal({
 
   const handleAccept = (size: string) => {
     setGlobalState({ ...globalState, tattooSize: size, allowCalendar: true });
-    Cookies.set("allow-calendar", JSON.stringify("true"));
+    Cookies.set("allow-calendar", '1');
     router.push("/dashboard/calendar");
   };
 

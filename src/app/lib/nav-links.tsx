@@ -114,7 +114,7 @@ export default function NavLinks() {
           <Link
             key={link.name}
             href={link.href}
-            className={`p-4 hover:bg-gray-700 flex items-center ${active}  text-xl font-semibold`}
+            className={`p-4 hover:bg-gray-700 flex items-center ${active} ${allow} text-xl font-semibold`}
           >
             <LinkIcon className="h-5 w-5 mr-2" />
             {link.name}

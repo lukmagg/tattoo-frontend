@@ -16,7 +16,7 @@ const SizeSelector = () => {
 
   const handleClick = (size: string) => {
     setGlobalState({ ...globalState, tattooSize: size, allowArtist: true });
-    Cookies.set("allow-artist", JSON.stringify("true"));
+    Cookies.set("allow-artist", '1');
     router.push("/dashboard/artist");
   };
 

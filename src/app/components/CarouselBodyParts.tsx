@@ -37,7 +37,7 @@ const CarouselBodyParts = () => {
 
     const handleClick = (part: string) => {
         setGlobalState({ ...globalState, tattooPlace: part, allowSize: true });
-        Cookies.set("allow-size", JSON.stringify("true"));
+        Cookies.set("allow-size", '1');
         router.push("/dashboard/size");
     };
 
