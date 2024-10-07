@@ -8,11 +8,8 @@ export default function Page() {
   // quitar el use client y el useEffect en este componente y convertirlo
   // a un server component
   useEffect(() => {
-    Cookies.remove('allow-calendar')
-    Cookies.remove('allow-size')
-    Cookies.remove('allow-site')
-    Cookies.remove('allow-form-contact')
-    Cookies.remove('allow-artist')
+    const myCookies = ['allow-calendar', 'allow-size', 'allow-site', 'allow-form-contact', 'allow-artist']
+    myCookies.forEach(cookie => Cookies.remove(cookie));
   }, [])
 
   return <div><div className='mt-20 flex flex-col items-center justify-center text-3xl m-auto flex-1 hidden-indications'>
