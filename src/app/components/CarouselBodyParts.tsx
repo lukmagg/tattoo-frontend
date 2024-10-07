@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Navigation, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper';
+import Image from "next/image";
 
 import Cookies from "js-cookie";
 
@@ -64,7 +65,13 @@ const CarouselBodyParts = () => {
                 >
                     {images.map((image, index) => (
                         <SwiperSlide key={index} className="cursor-pointer">
-                            <img src={image.src} alt={`Imagen ${index + 1}`} className="w-full h-auto object-cover" />
+                            <Image
+                                src={image.src}
+                                alt={`Imagen ${index + 1}`}
+                                className="w-full h-auto object-cover"
+                                width={150}
+                                height={24}
+                            />
                         </SwiperSlide>
                     ))}
                 </Swiper>

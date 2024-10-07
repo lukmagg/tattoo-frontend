@@ -70,7 +70,7 @@ function LoginForm() {
                 router.push('/dashboard'); // Redirige al dashboard
             }
         }
-    }, [dataAuth]);
+    }, [dataAuth, operation, router]);
 
 
     // validation
