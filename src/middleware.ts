@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
 
 
   if (request.nextUrl.pathname.endsWith("size")) {
-    return NextResponse.next();
+    console.log(`allowSize: ${allowSize}`)
     if (allowSize !== '1') {
       return NextResponse.redirect(new URL("/dashboard/site", request.url));
     } else {
@@ -25,7 +25,8 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.endsWith("calendar")) {
-    return NextResponse.next();
+    console.log(`allowCalendar: ${allowCalendar}`)
+    console.log(`allowSize: ${allowSize}`)
     if (allowCalendar !== '1') {
       if (allowSize !== '1') {
         return NextResponse.redirect(new URL("/dashboard/site", request.url));
@@ -38,7 +39,6 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.startsWith("/login")) {
-    return NextResponse.next();
     if (token) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
     } else {
