@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useGlobalState } from "../context/GlobalState";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Modal from "react-modal";
@@ -12,38 +11,17 @@ interface CalendarModalProps {
   onRequestClose: OnRequestCloseType;
 }
 
-export default function CalendarModal({
+const CalendarModal = ({
   isOpen,
   onRequestClose,
   selectedDay,
-}: CalendarModalProps) {
-  const { globalState, setGlobalState } = useGlobalState();
+}: CalendarModalProps) => {
   const [totalPrice, setTotalPrice] = useState(0);
-
-  // useEffect(() => {
-  //   let total = 0;
-
-  //   switch (selectedDay) {
-  //     case "small":
-  //       total = 10;
-  //       break;
-  //     case "medium":
-  //       total = 20;
-  //       break;
-  //     case "large":
-  //       total = 50;
-  //       break;
-  //   }
-  //   setTotalPrice(total);
-  // }, [selectedDay]);
 
   const router = useRouter();
 
   const handleAccept = (day: string) => {
     console.log(day)
-    // setGlobalState({ ...globalState, tattooSize: size, allowCalendar: true });
-    // Cookies.set("allow-calendar", JSON.stringify("true"));
-    // router.push("/dashboard/calendar");
   };
 
   return (
@@ -95,3 +73,6 @@ export default function CalendarModal({
     </div>
   );
 }
+
+
+export default CalendarModal

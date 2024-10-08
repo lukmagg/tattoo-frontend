@@ -2,7 +2,6 @@
 // import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { GlobalStateProvider } from "@/app/context/GlobalState";
 import Modal from "react-modal";
 import { useEffect } from "react";
 // import { Metadata } from "next";
@@ -27,17 +26,15 @@ export default function RootLayout({
   }, []);
   return (
     <>
-      <GlobalStateProvider>
-        <html lang="en">
-          <body className={inter.className}>
-            <ApolloWrapper>
-              <div id="__next">
-                {children}
-              </div>
-            </ApolloWrapper>
-          </body>
-        </html>
-      </GlobalStateProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <ApolloWrapper>
+            <div id="__next">
+              {children}
+            </div>
+          </ApolloWrapper>
+        </body>
+      </html>
     </>
   );
 }

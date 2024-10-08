@@ -12,6 +12,7 @@ import NavLinks from "../lib/nav-links";
 import Image from "next/image";
 
 const SideNav = () => {
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (

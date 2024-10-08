@@ -1,5 +1,4 @@
 "use client";
-import { useGlobalState } from "../context/GlobalState";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
@@ -11,6 +10,7 @@ import notify from "../lib/utils/Notifications";
 import nameMonthToNumber from "../lib/utils/nameMonthToNumber";
 import { TattooEvent, hours, months } from "../constants";
 import ContactModal from "./ContactModal";
+import { useStore } from "@/store";
 
 const days = Array.from({ length: 30 }, (_, i) => ({
   date: (i + 1).toString(),
@@ -18,9 +18,10 @@ const days = Array.from({ length: 30 }, (_, i) => ({
 }));
 
 export default function DateSelector() {
-  const router = useRouter();
+  const { myEventList, setMyEventList, setAllowContact } = useStore()
 
-  const { globalState, setGlobalState } = useGlobalState();
+
+  const router = useRouter();
 
   const [stringHour, setStringHour] = useState("08:00 AM");
 
@@ -50,18 +51,15 @@ export default function DateSelector() {
   }, [stringHour, day, hour, minutes, monthNumber]);
 
   const handleClick = () => {
-    if (dateIsDisponible(globalState.myEventList, date)) {
+    if (dateIsDisponible(myEventList, date)) {
       const newEvent = {
         start: date.toDate(),
         end: date.add(2, "hour").toDate(),
         title: "tattoo 4",
       };
 
-      setGlobalState((prevState: { myEventList: [TattooEvent] }) => ({
-        ...prevState,
-        myEventList: [...prevState.myEventList, newEvent],
-        allowContact: true,
-      }));
+      setMyEventList([...myEventList, newEvent])
+      setAllowContact(true)
 
       Cookies.set("allow-form-contact", '1');
 

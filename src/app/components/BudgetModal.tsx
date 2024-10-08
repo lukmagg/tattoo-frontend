@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useGlobalState } from "../context/GlobalState";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Modal from "react-modal";
 import { OnRequestCloseType } from "./../constants";
+import { useStore } from "@/store";
 
 interface BudgetModalProps {
   isOpen: boolean;
@@ -12,12 +12,16 @@ interface BudgetModalProps {
   onRequestClose: OnRequestCloseType;
 }
 
-export default function BudgetModal({
+const BudgetModal = ({
   isOpen,
   onRequestClose,
   selectedSize,
-}: BudgetModalProps) {
-  const { globalState, setGlobalState } = useGlobalState();
+}: BudgetModalProps) => {
+  const {
+    setAllowCalendar,
+    setTattooSize,
+  } = useStore()
+
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -40,7 +44,8 @@ export default function BudgetModal({
   const router = useRouter();
 
   const handleAccept = (size: string) => {
-    setGlobalState({ ...globalState, tattooSize: size, allowCalendar: true });
+    setTattooSize(size)
+    setAllowCalendar(true)
     Cookies.set("allow-calendar", '1');
     router.push("/dashboard/calendar");
   };
@@ -94,3 +99,6 @@ export default function BudgetModal({
     </div>
   );
 }
+
+
+export default BudgetModal

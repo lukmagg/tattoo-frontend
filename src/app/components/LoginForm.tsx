@@ -7,7 +7,6 @@ import { DecodedToken, SIGN_IN, SIGN_UP, USER } from "@/Constants";
 import { useMutation, useQuery } from '@apollo/client';
 import { useSuspenseQuery } from '@apollo/client';
 import jwt from 'jsonwebtoken';
-import { useGlobalState } from "../context/GlobalState";
 import Cookies from "js-cookie";
 
 

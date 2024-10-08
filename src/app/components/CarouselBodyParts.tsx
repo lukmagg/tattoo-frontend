@@ -1,5 +1,4 @@
 "use client"
-import { useGlobalState } from "../context/GlobalState";
 import { useRouter } from "next/navigation";
 import { useState } from 'react';
 import { Navigation, Scrollbar, A11y } from 'swiper/modules';
@@ -14,6 +13,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { useStore } from "@/store";
 
 const images = [
     { src: '/head.png', info: 'Cabeza' },
@@ -30,13 +30,15 @@ const images = [
 
 const CarouselBodyParts = () => {
 
+    const { setTattooPlace, setAllowSize } = useStore()
+
     const [activeIndex, setActiveIndex] = useState(0);
-    const { globalState, setGlobalState } = useGlobalState();
     const router = useRouter();
 
 
-    const handleClick = (part: string) => {
-        setGlobalState({ ...globalState, tattooPlace: part, allowSize: true });
+    const handleClick = (bodyPart: string) => {
+        setTattooPlace(bodyPart)
+        setAllowSize(true)
         Cookies.set("allow-size", '1');
         router.push("/dashboard/size");
     };
@@ -44,7 +46,6 @@ const CarouselBodyParts = () => {
     const handleSlideChange = (swiper: SwiperType) => {
         setActiveIndex(swiper.activeIndex);
     };
-
 
 
 

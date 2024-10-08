@@ -2,7 +2,7 @@ import { TattooEvent } from "@/app/constants";
 import dayjs, { Dayjs } from "dayjs";
 
 export default function dateIsDisponible(
-  datesList: [TattooEvent],
+  datesList: TattooEvent[],
   dateToCompare: Dayjs
 ) {
   let disponible = true;

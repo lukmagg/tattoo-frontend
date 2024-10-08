@@ -1,27 +1,30 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useGlobalState } from "../context/GlobalState";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Modal from "react-modal";
 import { OnRequestCloseType } from "../constants";
+import { useStore } from "@/store";
 
 interface ContactModalProps {
   isOpen: boolean;
   onRequestClose: OnRequestCloseType;
 }
 
-export default function ContactModal({
+const ContactModal = ({
   isOpen,
   onRequestClose,
-}: ContactModalProps) {
-  const { globalState, setGlobalState } = useGlobalState();
+}: ContactModalProps) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const router = useRouter();
 
   const handleAccept = (size: string) => {
-    setGlobalState({ ...globalState, tattooSize: size, allowCalendar: true });
+    const { setTattooSize, setAllowCalendar } = useStore()
+
+    setTattooSize(size)
+    setAllowCalendar(true)
+
     Cookies.set("allow-calendar", '1');
     router.push("/dashboard/calendar");
   };
@@ -108,10 +111,9 @@ export default function ContactModal({
 
           </form>
         </div>
-
-
-
       </Modal>
     </div>
   );
 }
+
+export default ContactModal

@@ -2,11 +2,15 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import { useGlobalState } from "../context/GlobalState";
+import { useStore } from "@/store";
 
 const SizeSelector = () => {
+  const {
+    setAllowArtist,
+    setTattooSize,
+  } = useStore()
+
   const [selectedSize, setSelectedSize] = useState("");
-  const { globalState, setGlobalState } = useGlobalState();
   const router = useRouter();
 
   const handleSizeChange = (size: string) => {
@@ -15,7 +19,8 @@ const SizeSelector = () => {
 
 
   const handleClick = (size: string) => {
-    setGlobalState({ ...globalState, tattooSize: size, allowArtist: true });
+    setTattooSize(size)
+    setAllowArtist(true)
     Cookies.set("allow-artist", '1');
     router.push("/dashboard/artist");
   };
@@ -58,7 +63,4 @@ const SizeSelector = () => {
 };
 
 export default SizeSelector;
-function setGlobalState(arg0: any) {
-  throw new Error("Function not implemented.");
-}
 

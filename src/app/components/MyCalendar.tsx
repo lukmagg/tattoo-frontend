@@ -2,24 +2,22 @@
 import { Calendar, dayjsLocalizer, SlotInfo } from "react-big-calendar";
 import dayjs from "dayjs";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useGlobalState } from "../context/GlobalState";
 import "dayjs/locale/es";
 import { TattooEvent } from "../constants";
 import { useState } from "react";
 import CalendarModal from "./CalendarModal";
-
-// interface SlotCalendar {
-//   start: Date;
-//   end: Date;
-//   title: string;
-// }
+import { useStore } from "@/store";
 
 dayjs.locale("es");
 const localizer = dayjsLocalizer(dayjs);
 
 
-function MyCalendar() {
-  const { globalState, setGlobalState } = useGlobalState();
+const MyCalendar = () => {
+  const {
+    myEventList,
+    setMyEventList
+  } = useStore()
+
   const [view, setView] = useState<'month' | 'day'>('month');
   const [date, setDate] = useState(new Date())
 
@@ -63,13 +61,7 @@ function MyCalendar() {
       title: `${startHour}hs / ${endHour}hs`,
     };
 
-    setGlobalState((prevState: { myEventList: TattooEvent[] }) => ({
-      ...prevState,
-      myEventList: [...prevState.myEventList, newEvent],
-      //allowContact: true,
-    }));
-
-
+    setMyEventList([...myEventList, newEvent])
   };
 
   const eventComponent = {
@@ -95,7 +87,7 @@ function MyCalendar() {
         <Calendar
           selectable={true}
           localizer={localizer}
-          events={globalState.myEventList}
+          events={myEventList}
           startAccessor="start"
           endAccessor="end"
           date={date}

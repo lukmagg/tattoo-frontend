@@ -12,10 +12,10 @@ import {
 } from "@heroicons/react/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useGlobalState } from "../context/GlobalState";
 import { useRouter } from "next/navigation";
 import Cookies from 'universal-cookie';
 import { useEffect, useState } from "react";
+import { useStore } from "@/store";
 
 
 const links = [
@@ -36,7 +36,13 @@ const links = [
 ];
 
 export default function NavLinks() {
-  const { globalState, setGlobalState } = useGlobalState();
+  const {
+    allowArtist,
+    allowSite,
+    allowCalendar,
+    allowSize,
+  } = useStore()
+
   const [mounted, setMounted] = useState(false);
 
   const router = useRouter();
@@ -79,16 +85,16 @@ export default function NavLinks() {
 
         switch (link.href) {
           case "/dashboard/site":
-            allow = globalState.allowSite === true ? "" : "disabled-link";
+            allow = allowSite === true ? "" : "disabled-link";
             break;
           case "/dashboard/size":
-            allow = globalState.allowSize === true ? "" : "disabled-link";
+            allow = allowSize === true ? "" : "disabled-link";
             break;
           case "/dashboard/calendar":
-            allow = globalState.allowCalendar === true ? "" : "disabled-link";
+            allow = allowCalendar === true ? "" : "disabled-link";
             break;
           case "/dashboard/artist":
-            allow = globalState.allowArtist === true ? "" : "disabled-link";
+            allow = allowArtist === true ? "" : "disabled-link";
             break;
           case "/login":
             allow = isLogged === true ? "hidden" : "";
