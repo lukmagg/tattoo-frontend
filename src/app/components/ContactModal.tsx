@@ -15,12 +15,13 @@ const ContactModal = ({
   isOpen,
   onRequestClose,
 }: ContactModalProps) => {
+  const { setTattooSize, setAllowCalendar } = useStore()
+
   const [totalPrice, setTotalPrice] = useState(0);
 
   const router = useRouter();
 
   const handleAccept = (size: string) => {
-    const { setTattooSize, setAllowCalendar } = useStore()
 
     setTattooSize(size)
     setAllowCalendar(true)
