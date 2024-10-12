@@ -16,7 +16,6 @@ export function middleware(request: NextRequest) {
 
 
   if (request.nextUrl.pathname.endsWith("size")) {
-    console.log(`allowSize: ${allowSize}`)
     if (allowSize !== '1') {
       return NextResponse.redirect(new URL("/dashboard/site", request.url));
     } else {
@@ -25,8 +24,6 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.endsWith("calendar")) {
-    console.log(`allowCalendar: ${allowCalendar}`)
-    console.log(`allowSize: ${allowSize}`)
     if (allowCalendar !== '1') {
       if (allowSize !== '1') {
         return NextResponse.redirect(new URL("/dashboard/site", request.url));
