@@ -1,1 +1,0 @@
- * Al momento de que el cliente elije una fecha, se agenda un turno de cuantas horas?
