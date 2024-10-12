@@ -1,0 +1,16 @@
+flujo del sistema:
+primero seleccionar lugar del tattoo
+segundo seleccionar tamaño
+tercero seleccionar artista
+cuarto muestra presupuesto al cliente
+(si el cliente acepta) -> muestra el calendario para fijar turno
+(si selecciona un dia) -> muestra formulario de datos del cliente
+-> en el formulario el cliente pone su numero de whatsapp y al aceptar
+    se le enviara un codigo de un solo uso y aparecera un modal explicandole
+    al cliente que debe poner ahi el codigo recibido en whatsapp.
+    Si el cliente pone bien el codigo se genera una reserva para la fecha
+    solicitada.
+(si cancela) -> vuelve al incio con form en blanco
+(opcion de modificar tamaño o lugar) -> vuelve al paso primero
+
+
