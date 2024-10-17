@@ -1,14 +1,14 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+import React, { useState } from 'react';
 import {
   HomeIcon,
   UserIcon,
   CogIcon,
   MenuIcon,
   XIcon,
-} from "@heroicons/react/outline";
-import Image from "next/image";
-import NavLinksAdmin from "../lib/nav-links-admin";
+} from '@heroicons/react/outline';
+import Image from 'next/image';
+import NavLinksAdmin from '../lib/nav-links-admin';
 
 const SideNavAdmin = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,8 +16,9 @@ const SideNavAdmin = () => {
   return (
     <div className="md:flex">
       <div
-        className={`fixed inset-0 z-50 bg-gray-800 text-white w-64 md:static md:translate-x-0 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
-          } transition-transform duration-300 ease-in-out`}
+        className={`fixed inset-0 z-50 bg-gray-800 text-white w-64 md:static md:translate-x-0 transform ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform duration-300 ease-in-out`}
       >
         <div className="p-4 text-lg font-bold flex justify-between items-center">
           <button className="md:hidden" onClick={() => setIsOpen(false)}>
@@ -37,13 +38,12 @@ const SideNavAdmin = () => {
             <Image
               src="/without-circle1009.png"
               alt="1009 Logo"
-              className=""   //dark:invert
+              className="" //dark:invert
               width={150}
               height={24}
               priority
             />
           </div>
-
         </div>
       </div>
 
@@ -53,8 +53,6 @@ const SideNavAdmin = () => {
       >
         <MenuIcon className="h-6 w-6 text-white" />
       </button>
-
-
     </div>
   );
 };

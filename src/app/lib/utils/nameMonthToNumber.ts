@@ -2,40 +2,40 @@ export default function nameMonthToNumber(monthName: string) {
   let monthNumber;
 
   switch (monthName) {
-    case "Enero":
+    case 'Enero':
       monthNumber = 0;
       break;
-    case "Febrero":
+    case 'Febrero':
       monthNumber = 1;
       break;
-    case "Marzo":
+    case 'Marzo':
       monthNumber = 2;
       break;
-    case "Abril":
+    case 'Abril':
       monthNumber = 3;
       break;
-    case "Mayo":
+    case 'Mayo':
       monthNumber = 4;
       break;
-    case "Junio":
+    case 'Junio':
       monthNumber = 5;
       break;
-    case "Julio":
+    case 'Julio':
       monthNumber = 6;
       break;
-    case "Agosto":
+    case 'Agosto':
       monthNumber = 7;
       break;
-    case "Septiembre":
+    case 'Septiembre':
       monthNumber = 8;
       break;
-    case "Octubre":
+    case 'Octubre':
       monthNumber = 9;
       break;
-    case "Noviembre":
+    case 'Noviembre':
       monthNumber = 10;
       break;
-    case "Diciembre":
+    case 'Diciembre':
       monthNumber = 11;
       break;
     default:

@@ -1,8 +1,6 @@
-'use client'
-import Cookies from "js-cookie";
-
+'use client';
+import Cookies from 'js-cookie';
 
 export default function Page() {
-    return <div>
-    </div>;
+  return <div></div>;
 }

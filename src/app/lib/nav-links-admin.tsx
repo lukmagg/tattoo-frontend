@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import {
   HomeIcon,
   UserIcon,
@@ -9,20 +9,19 @@ import {
   AdjustmentsIcon,
   MailIcon,
   LoginIcon,
-} from "@heroicons/react/outline";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+} from '@heroicons/react/outline';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Cookies from 'universal-cookie';
-import { useEffect, useState } from "react";
-import { useStore } from "@/store";
-
+import { useEffect, useState } from 'react';
+import { useStore } from '@/store';
 
 const links = [
   // { name: "User", href: "/dashboard/profile-client", icon: CalendarIcon },
 
-  { name: "Inicio", href: "/admin", icon: HomeIcon },
-  { name: "Artistas", href: "/admin/artists", icon: UserIcon },
+  { name: 'Inicio', href: '/admin', icon: HomeIcon },
+  { name: 'Artistas', href: '/admin/artists', icon: UserIcon },
   // { name: "Tamaño tattoo", href: "/dashboard/size", icon: AdjustmentsIcon },
   // { name: "Artista", href: "/dashboard/artist", icon: CalendarIcon },
 
@@ -32,17 +31,10 @@ const links = [
   // { name: "Clientes", href: "/dashboard/customers", icon: CogIcon },
   // { name: "Sign out", href: "/logout", icon: LogoutIcon },
   // { name: "Sign in", href: "/login", icon: LoginIcon },
-
 ];
 
 export default function NavLinksAdmin() {
-  const {
-    allowArtist,
-    allowSite,
-    allowCalendar,
-    allowSize,
-  } = useStore()
-
+  const { allowArtist, allowSite, allowCalendar, allowSize } = useStore();
 
   const [mounted, setMounted] = useState(false);
 
@@ -51,25 +43,24 @@ export default function NavLinksAdmin() {
   const pathname = usePathname();
   const cookies = new Cookies();
 
-
   // Asegura que el componente se ha montado
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  let allow = "";
+  let allow = '';
 
-  const token = cookies.get('token')
+  const token = cookies.get('token');
 
-  let isLogged = false
+  let isLogged = false;
 
   if (token) {
-    isLogged = true
+    isLogged = true;
   }
 
   const handleLogout = () => {
-    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-    router.push("/login");
+    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+    router.push('/login');
   };
 
   if (!mounted) {
@@ -82,32 +73,32 @@ export default function NavLinksAdmin() {
       {links.map((link) => {
         const LinkIcon = link.icon;
 
-        const active = pathname === link.href && "text-blue-500";
+        const active = pathname === link.href && 'text-blue-500';
 
         switch (link.href) {
-          case "/dashboard/site":
-            allow = allowSite === true ? "" : "disabled-link";
+          case '/dashboard/site':
+            allow = allowSite === true ? '' : 'disabled-link';
             break;
-          case "/dashboard/size":
-            allow = allowSize === true ? "" : "disabled-link";
+          case '/dashboard/size':
+            allow = allowSize === true ? '' : 'disabled-link';
             break;
-          case "/dashboard/calendar":
-            allow = allowCalendar === true ? "" : "disabled-link";
+          case '/dashboard/calendar':
+            allow = allowCalendar === true ? '' : 'disabled-link';
             break;
-          case "/dashboard/artist":
-            allow = allowArtist === true ? "" : "disabled-link";
+          case '/dashboard/artist':
+            allow = allowArtist === true ? '' : 'disabled-link';
             break;
-          case "/login":
-            allow = isLogged === true ? "hidden" : "";
+          case '/login':
+            allow = isLogged === true ? 'hidden' : '';
             break;
-          case "/logout":
-            allow = isLogged === true ? "" : "hidden";
+          case '/logout':
+            allow = isLogged === true ? '' : 'hidden';
             break;
           default:
-            allow = "";
+            allow = '';
         }
 
-        return link.href === "/logout" ? (
+        return link.href === '/logout' ? (
           // Llama a handleLogout si el link es "Sign out"
           <button
             key={link.name}

@@ -1,9 +1,8 @@
-"use client";
-import { ToastContainer } from "react-toastify";
-import { Suspense } from "react";
-import Loading from "../dashboard/loading";
-import SideNavAdmin from "../components/SideNavAdmin";
-
+'use client';
+import { ToastContainer } from 'react-toastify';
+import { Suspense } from 'react';
+import Loading from '../dashboard/loading';
+import SideNavAdmin from '../components/SideNavAdmin';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

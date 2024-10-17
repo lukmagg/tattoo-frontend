@@ -1,5 +1,5 @@
-import SizeIndication from "@/app/components/SizeIndication";
-import SizeSelector from "@/app/components/SizeSelector";
+import SizeIndication from '@/app/components/SizeIndication';
+import SizeSelector from '@/app/components/SizeSelector';
 
 export default function Page() {
   return (

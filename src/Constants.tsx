@@ -1,8 +1,5 @@
 import { TypedDocumentNode, gql } from '@apollo/client';
-import {
-  AUTH_RESPONSE_FRAGMENT,
-  USER_FRAGMENT,
-} from './app/apollo/fragments';
+import { AUTH_RESPONSE_FRAGMENT, USER_FRAGMENT, ARTIST_FRAGMENT } from './app/apollo/fragments';
 
 // INTERFACES
 interface Data {
@@ -145,6 +142,15 @@ export const SIGN_IN = gql`
     }
   }
   ${AUTH_RESPONSE_FRAGMENT}
+`;
+
+export const CREATE_ARTIST = gql`
+  mutation CreateArtist($createArtistInput: CreateArtistInput!) {
+    createArtist(createArtistInput: $createArtistInput) {
+      ...ArtistObjectWhole
+    }
+  }
+  ${ARTIST_FRAGMENT}
 `;
 
 export const TOTAL_COUNT: TypedDocumentNode<Data> = gql`

@@ -1,33 +1,29 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import Modal from "react-modal";
-import { OnRequestCloseType } from "../constants";
-import { useStore } from "@/store";
+'use client';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+import Modal from 'react-modal';
+import { OnRequestCloseType } from '../constants';
+import { useStore } from '@/store';
 
 interface ContactModalProps {
   isOpen: boolean;
   onRequestClose: OnRequestCloseType;
 }
 
-const ContactModal = ({
-  isOpen,
-  onRequestClose,
-}: ContactModalProps) => {
-  const { setTattooSize, setAllowCalendar } = useStore()
+const ContactModal = ({ isOpen, onRequestClose }: ContactModalProps) => {
+  const { setTattooSize, setAllowCalendar } = useStore();
 
   const [totalPrice, setTotalPrice] = useState(0);
 
   const router = useRouter();
 
   const handleAccept = (size: string) => {
+    setTattooSize(size);
+    setAllowCalendar(true);
 
-    setTattooSize(size)
-    setAllowCalendar(true)
-
-    Cookies.set("allow-calendar", '1');
-    router.push("/dashboard/calendar");
+    Cookies.set('allow-calendar', '1');
+    router.push('/dashboard/calendar');
   };
 
   return (
@@ -39,25 +35,28 @@ const ContactModal = ({
         style={{
           content: {
             //height: "550px",
-            width: "550px",
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-            background: "rgb(31 41 55)",
+            width: '550px',
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            background: 'rgb(31 41 55)',
             borderRadius: 10,
-            opacity: 1
+            opacity: 1,
           },
           overlay: {
             zIndex: 999,
           },
-
         }}
       >
         <div className="w-full h-full p-4">
-          <p className="text-center">Su turno ha sido agendado, por ultimo, complete el formulario para poder ponernos en contacto con usted gracias por confiar en 1009 Tattoo!</p>
+          <p className="text-center">
+            Su turno ha sido agendado, por ultimo, complete el formulario para
+            poder ponernos en contacto con usted gracias por confiar en 1009
+            Tattoo!
+          </p>
           <form className="w-full bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-8">
             <div className="mb-4">
               <label
@@ -109,12 +108,11 @@ const ContactModal = ({
                 Enviar
               </button>
             </div>
-
           </form>
         </div>
       </Modal>
     </div>
   );
-}
+};
 
-export default ContactModal
+export default ContactModal;

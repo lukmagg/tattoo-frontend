@@ -1,10 +1,10 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import Modal from "react-modal";
-import { OnRequestCloseType } from "./../constants";
-import { useStore } from "@/store";
+'use client';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+import Modal from 'react-modal';
+import { OnRequestCloseType } from './../constants';
+import { useStore } from '@/store';
 
 interface BudgetModalProps {
   isOpen: boolean;
@@ -17,10 +17,7 @@ const BudgetModal = ({
   onRequestClose,
   selectedSize,
 }: BudgetModalProps) => {
-  const {
-    setAllowCalendar,
-    setTattooSize,
-  } = useStore()
+  const { setAllowCalendar, setTattooSize } = useStore();
 
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -28,13 +25,13 @@ const BudgetModal = ({
     let total = 0;
 
     switch (selectedSize) {
-      case "small":
+      case 'small':
         total = 10;
         break;
-      case "medium":
+      case 'medium':
         total = 20;
         break;
-      case "large":
+      case 'large':
         total = 50;
         break;
     }
@@ -44,10 +41,10 @@ const BudgetModal = ({
   const router = useRouter();
 
   const handleAccept = (size: string) => {
-    setTattooSize(size)
-    setAllowCalendar(true)
-    Cookies.set("allow-calendar", '1');
-    router.push("/dashboard/calendar");
+    setTattooSize(size);
+    setAllowCalendar(true);
+    Cookies.set('allow-calendar', '1');
+    router.push('/dashboard/calendar');
   };
 
   return (
@@ -58,15 +55,15 @@ const BudgetModal = ({
         contentLabel="Budget Modal"
         style={{
           content: {
-            height: "400px",
-            width: "400px",
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-            background: "rgb(31 41 55)",
+            height: '400px',
+            width: '400px',
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            background: 'rgb(31 41 55)',
             borderRadius: 10,
           },
         }}
@@ -92,13 +89,9 @@ const BudgetModal = ({
             </div>
           </div>
         </div>
-
-
-
       </Modal>
     </div>
   );
-}
+};
 
-
-export default BudgetModal
+export default BudgetModal;

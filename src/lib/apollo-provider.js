@@ -8,7 +8,7 @@ import {
   NextSSRApolloClient,
 } from '@apollo/experimental-nextjs-app-support/ssr';
 import { setContext } from '@apollo/client/link/context';
-import { getToken } from './cookieUtils'
+import { getToken } from './cookieUtils';
 
 function makeClient() {
   const httpLink = new HttpLink({
@@ -17,7 +17,7 @@ function makeClient() {
 
   const authLink = setContext((_, { headers }) => {
     const token = getToken();
-    
+
     return {
       headers: {
         ...headers,
@@ -42,5 +42,9 @@ function makeClient() {
 }
 
 export function ApolloWrapper({ children }) {
-  return <ApolloNextAppProvider makeClient={makeClient}>{children}</ApolloNextAppProvider>;
+  return (
+    <ApolloNextAppProvider makeClient={makeClient}>
+      {children}
+    </ApolloNextAppProvider>
+  );
 }

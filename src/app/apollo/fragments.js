@@ -10,7 +10,6 @@ export const USER_FRAGMENT = gql`
   }
 `;
 
-
 export const AUTH_RESPONSE_FRAGMENT = gql`
   fragment AuthResponseObjectWhole on AuthResponseObject {
     user {
@@ -19,4 +18,20 @@ export const AUTH_RESPONSE_FRAGMENT = gql`
     token
   }
   ${USER_FRAGMENT}
+`;
+
+
+export const ARTIST_FRAGMENT = gql`
+  fragment ArtistObjectWhole on ArtistObject {
+    id
+    name
+    description
+    color
+    eventList {
+      start
+      end
+      title
+    }
+    isActive
+  }
 `;

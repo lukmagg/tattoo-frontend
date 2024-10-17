@@ -1,9 +1,9 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import Modal from "react-modal";
-import { OnRequestCloseType } from "../constants";
+'use client';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+import Modal from 'react-modal';
+import { OnRequestCloseType } from '../constants';
 
 interface CalendarModalProps {
   isOpen: boolean;
@@ -21,7 +21,7 @@ const CalendarModal = ({
   const router = useRouter();
 
   const handleAccept = (day: string) => {
-    console.log(day)
+    console.log(day);
   };
 
   return (
@@ -32,15 +32,15 @@ const CalendarModal = ({
         contentLabel="Calendar Modal"
         style={{
           content: {
-            height: "400px",
-            width: "400px",
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-            background: "rgb(31 41 55)",
+            height: '400px',
+            width: '400px',
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            background: 'rgb(31 41 55)',
             borderRadius: 10,
           },
         }}
@@ -48,7 +48,9 @@ const CalendarModal = ({
         <div className="p-4 h-[350px] max-w-sm bg-white shadow dark:bg-gray-800">
           <div className="flex h-full flex-col items-center">
             <div className="grow">
-              <h2 className="text-white">Dia seleccionado: {selectedDay.getHours()}</h2>
+              <h2 className="text-white">
+                Dia seleccionado: {selectedDay.getHours()}
+              </h2>
             </div>
             <div className="">
               <button
@@ -66,13 +68,9 @@ const CalendarModal = ({
             </div>
           </div>
         </div>
-
-
-
       </Modal>
     </div>
   );
-}
+};
 
-
-export default CalendarModal
+export default CalendarModal;

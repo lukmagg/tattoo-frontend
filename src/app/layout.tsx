@@ -1,13 +1,13 @@
-"use client";
+'use client';
 // import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Modal from "react-modal";
-import { useEffect } from "react";
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Modal from 'react-modal';
+import { useEffect } from 'react';
 // import { Metadata } from "next";
-import { ApolloWrapper } from './../lib/apollo-provider.js'
+import { ApolloWrapper } from './../lib/apollo-provider.js';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 // export const metadata: Metadata = {
 //   title: "1009 Tattoo budget generator system",
@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      Modal.setAppElement("#__next");
+    if (typeof window !== 'undefined') {
+      Modal.setAppElement('#__next');
     }
   }, []);
   return (
@@ -29,9 +29,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <ApolloWrapper>
-            <div id="__next">
-              {children}
-            </div>
+            <div id="__next">{children}</div>
           </ApolloWrapper>
         </body>
       </html>

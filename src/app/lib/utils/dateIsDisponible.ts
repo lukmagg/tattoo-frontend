@@ -1,9 +1,9 @@
-import { TattooEvent } from "@/app/constants";
-import dayjs, { Dayjs } from "dayjs";
+import { TattooEvent } from '@/app/constants';
+import dayjs, { Dayjs } from 'dayjs';
 
 export default function dateIsDisponible(
   datesList: TattooEvent[],
-  dateToCompare: Dayjs
+  dateToCompare: Dayjs,
 ) {
   let disponible = true;
 

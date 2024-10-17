@@ -1,16 +1,16 @@
-"use client";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
-import makeDate from "../lib/utils/makeDate";
-import hourFormatter from "../lib/utils/hourFormatter";
-import dateIsDisponible from "../lib/utils/dateIsDisponible";
-import dayjs, { Dayjs } from "dayjs";
-import notify from "../lib/utils/Notifications";
-import nameMonthToNumber from "../lib/utils/nameMonthToNumber";
-import { TattooEvent, hours, months } from "../constants";
-import ContactModal from "./ContactModal";
-import { useStore } from "@/store";
+'use client';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
+import makeDate from '../lib/utils/makeDate';
+import hourFormatter from '../lib/utils/hourFormatter';
+import dateIsDisponible from '../lib/utils/dateIsDisponible';
+import dayjs, { Dayjs } from 'dayjs';
+import notify from '../lib/utils/Notifications';
+import nameMonthToNumber from '../lib/utils/nameMonthToNumber';
+import { TattooEvent, hours, months } from '../constants';
+import ContactModal from './ContactModal';
+import { useStore } from '@/store';
 
 const days = Array.from({ length: 30 }, (_, i) => ({
   date: (i + 1).toString(),
@@ -18,29 +18,26 @@ const days = Array.from({ length: 30 }, (_, i) => ({
 }));
 
 export default function DateSelector() {
-  const { myEventList, setMyEventList, setAllowContact } = useStore()
-
+  const { myEventList, setMyEventList, setAllowContact } = useStore();
 
   const router = useRouter();
 
-  const [stringHour, setStringHour] = useState("08:00 AM");
+  const [stringHour, setStringHour] = useState('08:00 AM');
 
   const [hour, setHour] = useState(8);
 
   const [minutes, setMinutes] = useState(0);
 
   const [day, setDay] = useState(1);
-  const [monthValue, setMonthValue] = useState("Enero");
+  const [monthValue, setMonthValue] = useState('Enero');
   const [monthNumber, setMonthNumber] = useState(0);
 
   const [date, setDate] = useState<Dayjs>(dayjs());
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
-
 
   useEffect(() => {
     const { HH, mm } = hourFormatter(stringHour);
@@ -54,20 +51,20 @@ export default function DateSelector() {
     if (dateIsDisponible(myEventList, date)) {
       const newEvent = {
         start: date.toDate(),
-        end: date.add(2, "hour").toDate(),
-        title: "tattoo 4",
+        end: date.add(2, 'hour').toDate(),
+        title: 'tattoo 4',
       };
 
-      setMyEventList([...myEventList, newEvent])
-      setAllowContact(true)
+      setMyEventList([...myEventList, newEvent]);
+      setAllowContact(true);
 
-      Cookies.set("allow-form-contact", '1');
+      Cookies.set('allow-form-contact', '1');
 
-      notify("success", "Horario agendado!");
+      notify('success', 'Horario agendado!');
 
       openModal();
     } else {
-      notify("error", "Horario no disponible");
+      notify('error', 'Horario no disponible');
     }
   };
 
@@ -86,10 +83,7 @@ export default function DateSelector() {
 
   return (
     <>
-      <ContactModal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-      />
+      <ContactModal isOpen={modalIsOpen} onRequestClose={closeModal} />
       <div className="text-3xl m-auto mb-10 flex-1 hidden-indications">
         <p className="text-center leading-loose">Seleccione una fecha</p>
       </div>

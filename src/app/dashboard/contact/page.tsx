@@ -1,4 +1,4 @@
-import FormContact from "@/app/components/FormContact";
+import FormContact from '@/app/components/FormContact';
 
 export default function Page() {
   return (

@@ -31,7 +31,6 @@ body {
   background: red !important;
 }
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -178,7 +177,7 @@ body {
     left: 1025px;
     width: 70px;
     height: 170px;
-   /* border: 2px solid green; */ 
+    /* border: 2px solid green; */
   }
 
   .right-leg {

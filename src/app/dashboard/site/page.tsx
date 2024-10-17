@@ -1,5 +1,5 @@
-import BodyPlace from "@/app/components/BodyPlace";
-import PlaceIndications from "@/app/components/PlaceIndications";
+import BodyPlace from '@/app/components/BodyPlace';
+import PlaceIndications from '@/app/components/PlaceIndications';
 
 export default function Page() {
   return (
