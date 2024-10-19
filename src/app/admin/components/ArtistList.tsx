@@ -1,33 +1,9 @@
-import { CardProps } from "@/app/constants";
+'use client'
 
-const cardsData = [
-  {
-    name: 'Lucas',
-    description:
-      'Este es un ejemplo de una card simple utilizando Tailwind CSS. Este es un ejemplo de una card simple utilizando Tailwind CSS. Este es un ejemplo de una card simple utilizando Tailwind CSS. Este es un ejemplo de una card simple utilizando Tailwind CSS.',
-    instagram: 'https://www.instagram.com/lucas',
-    color: '#4A90E2',
-  },
-  {
-    name: 'Maria',
-    description: 'Otra card de ejemplo.',
-    instagram: 'https://www.instagram.com/maria',
-    color: '#FF0000',
-  },
-  {
-    name: 'Juan',
-    description: 'Card de un artista.',
-    instagram: 'https://www.instagram.com/juan',
-    color: '#00FF00',
-  },
-  {
-    name: 'Ana',
-    description: 'Descripción de Ana.',
-    instagram: 'https://www.instagram.com/ana',
-    color: '#F5A623',
-  },
-];
-
+import { ARTISTS, CardProps, Artist } from '@/Constants';
+import { useQuery } from '@apollo/client';
+import { useEffect } from 'react';
+import { useStore } from '@/store';
 
 
 const Card: React.FC<CardProps> = ({
@@ -55,8 +31,7 @@ const Card: React.FC<CardProps> = ({
         <p className="mt-2 text-gray-600">
           Color:{' '}
           <span
-            className="inline-block w-4 h-4 rounded-full"
-            style={{ backgroundColor: color }}
+            className={`${color} inline-block w-4 h-4 rounded-full`}
           ></span>
         </p>
         <p className="mt-2 text-gray-600">
@@ -73,17 +48,38 @@ const Card: React.FC<CardProps> = ({
       </div>
     </div>
   );
-};
+}
 
-function AddArtist() {
+function ArtistList() {
+  const { data, error, loading } = useQuery(ARTISTS)
+  const { artistList, setArtistList } = useStore();
+
+
+  useEffect(() => {
+
+    if (data) {
+      const { artists } = data
+
+      const auxList: Artist[] = []
+      artists.forEach((artist: Artist) => {
+        const { name, description, instagram, color } = artist
+        const newArtist = { name, description, instagram, color }
+        auxList.push(newArtist)
+      })
+
+      setArtistList(auxList)
+    }
+
+  }, [data])
+
   const handleClose = (index: number) => {
-    console.log(`Card ${index + 1} cerrada`);
+    console.log(`Card ${index + 1} cerrada`)
   };
 
-  const cards = [];
+  const cards = []
 
-  for (let i = 0; i < cardsData.length; i++) {
-    const card = cardsData[i];
+  for (let i = 0; i < artistList.length; i++) {
+    const card = artistList[i]
 
     cards.push(
       <Card
@@ -104,4 +100,4 @@ function AddArtist() {
   );
 }
 
-export default AddArtist;
+export default ArtistList

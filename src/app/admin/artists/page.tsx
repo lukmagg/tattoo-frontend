@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 import AddArtist from '../components/AddArtist';
 import ArtistList from '../components/ArtistList';
 

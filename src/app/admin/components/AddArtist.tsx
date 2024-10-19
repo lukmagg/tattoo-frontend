@@ -1,29 +1,40 @@
-import { FormEvent } from "react";
-import { useMutation } from '@apollo/client';
-import { CREATE_ARTIST } from '@/Constants';
+'use client'
+import { FormEvent, useState } from "react"
+import { useMutation } from '@apollo/client'
+import { CREATE_ARTIST } from '@/Constants'
+import { useStore } from '@/store';
+
 
 function AddArtist() {
+  const { artistList, setArtistList } = useStore();
   const [artist, { data, loading, error }] = useMutation(CREATE_ARTIST);
+  const [selectedColor, setSelectedColor] = useState('text-red-700');
+
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedColor(event.target.value);
+  };
 
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const formData = new FormData(event.currentTarget);
+
+    const formData = new FormData(event.currentTarget)
 
     const data = Object.fromEntries(formData.entries())
 
     try {
-      await artist({
+      const res = await artist({
         variables: {
-          createArtistInput: {
-            ...data,
-          },
+          createArtistInput: data,
         },
       })
+      const newArtist = res.data.createArtist
+      setArtistList([...artistList, newArtist])
     } catch (err) {
-      console.error('Error en la mutación:', err);
-      alert('Hubo un problema al enviar el formulario. Intenta nuevamente.');
+      console.error('Error en la mutación:', err)
+      alert('Hubo un problema al enviar el formulario. Intenta nuevamente.')
     }
 
 
@@ -82,12 +93,13 @@ function AddArtist() {
             <select
               id="color"
               name="color"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className={`${selectedColor} mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+              onChange={handleChange}
             >
-              <option value="rojo">Rojo</option>
-              <option value="azul">Azul</option>
-              <option value="verde">Verde</option>
-              <option value="amarillo">Amarillo</option>
+              <option value="text-red-700">Rojo</option>
+              <option value="text-blue-700">Azul</option>
+              <option value="text-green-700">Verde</option>
+              <option value="text-yellow-400">Amarillo</option>
             </select>
           </div>
           {/* Field Instagram */}
@@ -116,8 +128,8 @@ function AddArtist() {
               Enviar
             </button>
           </div>
-        </form>
-      </div>
+        </form >
+      </div >
     </>
   );
 }

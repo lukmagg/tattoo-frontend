@@ -29,8 +29,8 @@ const links = [
 
   // { name: "Facturas", href: "/dashboard/invoices", icon: DocumentIcon },
   // { name: "Clientes", href: "/dashboard/customers", icon: CogIcon },
-  { name: 'Sign out', href: '/logout', icon: LogoutIcon },
-  { name: 'Sign in', href: '/login', icon: LoginIcon },
+  // { name: 'Sign out', href: '/logout', icon: LogoutIcon },
+  // { name: 'Sign in', href: '/login', icon: LoginIcon },
 ];
 
 export default function NavLinks() {

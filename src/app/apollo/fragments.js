@@ -20,7 +20,6 @@ export const AUTH_RESPONSE_FRAGMENT = gql`
   ${USER_FRAGMENT}
 `;
 
-
 export const ARTIST_FRAGMENT = gql`
   fragment ArtistObjectWhole on ArtistObject {
     id
@@ -32,6 +31,7 @@ export const ARTIST_FRAGMENT = gql`
       end
       title
     }
+    instagram
     isActive
   }
 `;

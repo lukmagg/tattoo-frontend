@@ -10,16 +10,21 @@ import {
 import Link from 'next/link';
 import NavLinks from '../lib/nav-links';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const SideNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const router = useRouter();
+
+
+  const handleDoubleClick = () => router.push('/login');
+
   return (
     <div className="md:flex">
       <div
-        className={`fixed inset-0 z-50 bg-gray-800 text-white w-64 md:static md:translate-x-0 transform ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out`}
+        className={`fixed inset-0 z-50 bg-gray-800 text-white w-64 md:static md:translate-x-0 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          } transition-transform duration-300 ease-in-out`}
       >
         <div className="p-4 text-lg font-bold flex justify-between items-center">
           <button className="md:hidden" onClick={() => setIsOpen(false)}>
@@ -35,7 +40,7 @@ const SideNav = () => {
             </nav>
           </div>
 
-          <div className="pb-20">
+          <div className="pb-20" onDoubleClick={handleDoubleClick}>
             <Image
               src="/without-circle1009.png"
               alt="1009 Logo"

@@ -8,9 +8,11 @@ import dateIsDisponible from '../lib/utils/dateIsDisponible';
 import dayjs, { Dayjs } from 'dayjs';
 import notify from '../lib/utils/Notifications';
 import nameMonthToNumber from '../lib/utils/nameMonthToNumber';
-import { TattooEvent, hours, months } from '../constants';
+
+
 import ContactModal from './ContactModal';
 import { useStore } from '@/store';
+import { hours, months } from '@/Constants';
 
 const days = Array.from({ length: 30 }, (_, i) => ({
   date: (i + 1).toString(),

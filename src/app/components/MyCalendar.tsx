@@ -3,7 +3,7 @@ import { Calendar, dayjsLocalizer, SlotInfo } from 'react-big-calendar';
 import dayjs from 'dayjs';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'dayjs/locale/es';
-import { TattooEvent } from '../constants';
+import { TattooEvent } from '@/Constants';
 import { useState } from 'react';
 import CalendarModal from './CalendarModal';
 import { useStore } from '@/store';

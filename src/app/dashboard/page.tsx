@@ -2,8 +2,10 @@
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useStore } from '@/store';
 
 export default function Page() {
+  const { setAllowSite } = useStore();
   const router = useRouter();
 
   // TODO: cuando sepa como borrar las cookies desde el lado del servidor,
@@ -21,6 +23,7 @@ export default function Page() {
   }, []);
 
   const handleClick = () => {
+    setAllowSite(true);
     router.push('/dashboard/site');
   };
 

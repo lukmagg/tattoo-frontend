@@ -1,7 +1,30 @@
 import { TypedDocumentNode, gql } from '@apollo/client';
 import { AUTH_RESPONSE_FRAGMENT, USER_FRAGMENT, ARTIST_FRAGMENT } from './app/apollo/fragments';
 
+
+
 // INTERFACES
+export interface TattooEvent {
+  title: string;
+  start: Date;
+  end: Date;
+}
+
+export interface DecodedToken {
+  id: string;
+  roles: [string];
+  iat: number;
+  exp: number;
+}
+
+export interface CardProps {
+  name: string;
+  description: string;
+  instagram: string;
+  color: string;
+  onClose: () => void; // Si 'onClose' es una función sin retorno
+}
+
 interface Data {
   totalCount: number;
 }
@@ -27,92 +50,31 @@ interface Variables {
 }
 
 // ENUMS
-export enum Area {
-  STORY = 'STORY',
-  NOVEL = 'NOVEL',
-  THEATER = 'THEATER',
-  POETRY = 'POETRY',
-  BIOGRAPHY = 'BIOGRAPHY',
-  PSYCHOLOGY = 'PSYCHOLOGY',
-  SOCIOLOGY = 'SOCIOLOGY',
-  MYTHOLOGY = 'MYTHOLOGY',
-  PHYSICAL_CHEMISTRY = 'PHYSICAL CHEMISTRY',
-  MUSIC = 'MUSIC',
-  EDUCATION = 'EDUCATION',
-  LANGUAGES = 'LANGUAGES',
-  DICTIONARIES = 'DICTIONARIES',
-  BIOLOGY = 'BIOLOGY',
-  SCIENCES = 'SCIENCES',
-  ART = 'ART',
-  ENTERTAINMENT = 'ENTERTAINMENT',
-  TECHNOLOGY = 'TECHNOLOGY',
-  SPORTS = 'SPORTS',
-  MAGAZINES = 'MAGAZINES',
-}
+// export enum Lend {
+//   PRESTADO = 'PRESTADO',
+//   DISPONIBLE = 'DISPONIBLE',
+// }
 
-export enum Lend {
-  PRESTADO = 'PRESTADO',
-  DISPONIBLE = 'DISPONIBLE',
-}
 
-enum Group {
-  ONE = 1,
-  TWO = 2,
-  THREE = 3,
-  FOUR = 4,
-  FIVE = 5,
-  SIX = 6,
-  SEVEN = 7,
-  EIGHT = 8,
-  NINE = 9,
-  TEN = 10,
-  ELEVEN = 11,
-  TWELVE = 12,
-  THIRTEEN = 13,
-  FOURTEEN = 14,
-}
+// export interface User {
+//   id?: string;
+//   name: string;
+//   email: string;
+//   //phone?: string;
+//   roles?: string[];
+//   typeUser: TypeUser;
+//   grupo?: Group; 
+//   isActive?: boolean;
+//   createdAt?: Date;
+// }
 
-enum Material {
-  BOOK = 'BOOK',
-  MAGAZINE = 'MAGAZINE',
-}
-
-export enum TypeUser {
-  TEACHER = 'TEACHER',
-  TUTOR = 'TUTOR',
-  STUDENT = 'STUDENT',
-}
-
-// agregar internalId (opcional)
-export interface Book {
-  id?: string | null;
-  title: string;
-  author: string;
-  edition?: string | null;
-  pages?: number | null;
-  area?: Area | null;
-  inventory?: number | null;
-  lend?: Lend | null;
-  userId?: string | null;
-  type?: Material | null;
-  isbn?: string | null; //book
-  issn?: string | null; //magazine
-  internalId?: number | null;
-  //editionYear?:Date;
-  printSite?: string | null;
-  lendingInit?: Date | null;
-  lendinExpiration?: Date | null;
-  addedAt?: Date | null;
-}
-
-export interface User {
+export interface Artist {
   id?: string;
   name: string;
-  email: string;
-  //phone?: string;
-  roles?: string[];
-  typeUser: TypeUser;
-  grupo?: Group;
+  description: string;
+  color: string;
+  instagram: string;
+  eventList?: TattooEvent[];
   isActive?: boolean;
   createdAt?: Date;
 }
@@ -142,6 +104,15 @@ export const SIGN_IN = gql`
     }
   }
   ${AUTH_RESPONSE_FRAGMENT}
+`;
+
+export const ARTISTS = gql`
+  query Artists {
+    artists {
+      ...ArtistObjectWhole
+    }
+  }
+  ${ARTIST_FRAGMENT}
 `;
 
 export const CREATE_ARTIST = gql`
@@ -230,3 +201,46 @@ export const UPDATE_USER = gql`
   }
   ${USER_FRAGMENT}
 `;
+
+
+
+// Gloabl constants
+export const hours = [
+  { date: '08:00', index: 8 },
+  { date: '09:00', index: 9 },
+  { date: '10:00', index: 10 },
+  { date: '11:00', index: 11 },
+  { date: '12:00', index: 12 },
+  { date: '13:00', index: 13 },
+  { date: '14:00', index: 14 },
+  { date: '15:00', index: 15 },
+  { date: '16:00', index: 16 },
+  { date: '17:00', index: 17 },
+  { date: '18:00', index: 18 },
+  { date: '19:00', index: 19 },
+  { date: '20:00', index: 20 },
+  { date: '21:00', index: 21 },
+  { date: '22:00', index: 22 },
+];
+
+//no modificar probar con estos numero y cambiar otra cosa si no funciona asi
+export const months = [
+  { date: 'Enero', number: 0 },
+  { date: 'Febrero', number: 1 },
+  { date: 'Marzo', number: 2 },
+  { date: 'Abril', number: 3 },
+  { date: 'Mayo', number: 4 },
+  { date: 'Junio', number: 5 },
+  { date: 'Julio', number: 6 },
+  { date: 'Agosto', number: 7 },
+  { date: 'Septiembre', number: 8 },
+  { date: 'Octubre', number: 9 },
+  { date: 'Noviembre', number: 10 },
+  { date: 'Diciembre', number: 11 },
+];
+
+
+// Custom types
+
+export type OnRequestCloseType = () => void;
+export type OnCancelType = () => void;

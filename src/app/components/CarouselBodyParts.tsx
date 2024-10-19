@@ -5,7 +5,7 @@ import { Navigation, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper';
 import Image from 'next/image';
-
+import { useStore } from '@/store';
 import Cookies from 'js-cookie';
 
 // Import Swiper styles
@@ -13,7 +13,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { useStore } from '@/store';
 
 const images = [
   { src: '/head.png', info: 'Cabeza' },

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import Modal from 'react-modal';
-import { OnRequestCloseType } from '../constants';
+import { OnRequestCloseType } from '@/Constants';
 import { useStore } from '@/store';
 
 interface ContactModalProps {

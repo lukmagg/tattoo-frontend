@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { TattooEvent } from './app/constants';
+import { Artist, TattooEvent } from '@/Constants';
 import { create } from 'zustand';
 
 type Store = {
@@ -11,6 +11,7 @@ type Store = {
   allowContact: boolean;
   allowArtist: boolean;
   myEventList: Array<TattooEvent>;
+  artistList: Array<Artist>;
   setTattooPlace: (newTattooPlace: string) => void;
   setTattooSize: (newTattooSize: string) => void;
   setAllowSite: (newAllowSite: boolean) => void;
@@ -19,12 +20,13 @@ type Store = {
   setAllowArtist: (newAllowArtist: boolean) => void;
   setAllowCalendar: (newAllowCalendar: boolean) => void;
   setMyEventList: (newMyEventList: Array<TattooEvent>) => void;
+  setArtistList: (newArtistList: Array<Artist>) => void;
 };
 
 export const useStore = create<Store>((set) => ({
   tattooPlace: '',
   tattooSize: '',
-  allowSite: true,
+  allowSite: false,
   allowSize: false,
   allowCalendar: false,
   allowContact: false,
@@ -46,6 +48,7 @@ export const useStore = create<Store>((set) => ({
       title: 'tattoo 3',
     },
   ],
+  artistList: [],
   setTattooPlace: (newTattooPlace: string) => {
     set(() => ({
       tattooPlace: newTattooPlace,
@@ -84,6 +87,11 @@ export const useStore = create<Store>((set) => ({
   setMyEventList: (newMyEventList: Array<TattooEvent>) => {
     set(() => ({
       myEventList: newMyEventList,
+    }));
+  },
+  setArtistList: (newArtistList: Array<Artist>) => {
+    set(() => ({
+      artistList: newArtistList,
     }));
   },
 }));
