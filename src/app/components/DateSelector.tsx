@@ -86,7 +86,7 @@ export default function DateSelector() {
   return (
     <>
       <ContactModal isOpen={modalIsOpen} onRequestClose={closeModal} />
-      <div className="text-3xl m-auto mb-10 flex-1 hidden-indications">
+      <div className="text-3xl m-auto mb-10 flex-1 hidden-mobile">
         <p className="text-center leading-loose">Seleccione una fecha</p>
       </div>
 

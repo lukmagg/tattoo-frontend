@@ -2,13 +2,8 @@
 import {
   HomeIcon,
   UserIcon,
-  LogoutIcon,
-  DocumentIcon,
-  CogIcon,
   CalendarIcon,
   AdjustmentsIcon,
-  MailIcon,
-  LoginIcon,
 } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -18,19 +13,11 @@ import { useEffect, useState } from 'react';
 import { useStore } from '@/store';
 
 const links = [
-  // { name: "User", href: "/dashboard/profile-client", icon: CalendarIcon },
-
   { name: 'Inicio', href: '/dashboard', icon: HomeIcon },
   { name: 'Lugar tattoo', href: '/dashboard/site', icon: UserIcon },
   { name: 'Tamaño tattoo', href: '/dashboard/size', icon: AdjustmentsIcon },
   { name: 'Artista', href: '/dashboard/artist', icon: CalendarIcon },
-
   { name: 'Calendario', href: '/dashboard/calendar', icon: CalendarIcon },
-
-  // { name: "Facturas", href: "/dashboard/invoices", icon: DocumentIcon },
-  // { name: "Clientes", href: "/dashboard/customers", icon: CogIcon },
-  // { name: 'Sign out', href: '/logout', icon: LogoutIcon },
-  // { name: 'Sign in', href: '/login', icon: LoginIcon },
 ];
 
 export default function NavLinks() {
@@ -58,11 +45,6 @@ export default function NavLinks() {
     isLogged = true;
   }
 
-  const handleLogout = () => {
-    document.cookie = 'token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC';
-    router.push('/login');
-  };
-
   if (!mounted) {
     // Mientras no esté montado, no aplicamos clases condicionales
     return null;
@@ -88,36 +70,20 @@ export default function NavLinks() {
           case '/dashboard/artist':
             allow = allowArtist === true ? '' : 'disabled-link';
             break;
-          case '/login':
-            allow = isLogged === true ? 'hidden' : '';
-            break;
-          case '/logout':
-            allow = isLogged === true ? '' : 'hidden';
-            break;
           default:
             allow = '';
         }
 
-        return link.href === '/logout' ? (
-          // Llama a handleLogout si el link es "Sign out"
-          <button
-            key={link.name}
-            onClick={handleLogout}
-            className={`p-4 hover:bg-gray-700 flex items-center ${allow} text-xl font-semibold`}
-          >
-            <LinkIcon className="h-5 w-5 mr-2" />
-            {link.name}
-          </button>
-        ) : (
+        return (
           <Link
             key={link.name}
             href={link.href}
-            className={`p-4 hover:bg-gray-700 flex items-center ${active} ${allow} text-xl font-semibold`}
+            className={`flex items-center justify-center md:justify-start p-6 md:p-4 hover:bg-gray-700 ${active} ${allow} text-3xl md:text-xl font-semibold`}
           >
-            <LinkIcon className="h-5 w-5 mr-2" />
+            <LinkIcon className="h-5 w-5 mr-2 hidden-mobile" />
             {link.name}
           </Link>
-        );
+        )
       })}
     </>
   );

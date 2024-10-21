@@ -28,8 +28,8 @@ export default function Page() {
   };
 
   return (
-    <div>
-      <div className="mt-20 flex flex-col items-center justify-center text-3xl m-auto flex-1 hidden-indications">
+    <>
+      <div className="flex flex-col items-center justify-center mt-[200px] md:mt-20 text-3xl m-auto flex-1">
         <p className="text-center leading-loose">
           El sistema generara un presupuesto
         </p>
@@ -37,7 +37,7 @@ export default function Page() {
         <p className="text-center leading-loose">Siga las indicaciones...</p>
       </div>
 
-      <div className="flex flex-col w-[32rem] m-auto pb-10 mt-10">
+      <div className="flex flex-col md:w-[32rem] m-auto pb-10 mt-10">
         <button
           onClick={handleClick}
           className="mt-2 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-400 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
@@ -45,6 +45,6 @@ export default function Page() {
           Empezar
         </button>
       </div>
-    </div>
+    </>
   );
 }

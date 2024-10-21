@@ -23,7 +23,7 @@ const SizeSelector = () => {
 
   return (
     <>
-      <div className="flex flex-col w-[32rem] m-auto pb-10 mt-10">
+      <div className="flex flex-col md:w-[32rem] m-auto pb-10 mt-10">
         <p className="">Pequeño: 5 cm x 10 cm</p>
         <button
           onClick={() => handleSizeChange('small')}

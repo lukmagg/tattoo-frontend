@@ -1,27 +1,30 @@
 'use client';
 import React, { useState } from 'react';
 import {
-  HomeIcon,
-  UserIcon,
-  CogIcon,
   MenuIcon,
   XIcon,
 } from '@heroicons/react/outline';
 import Image from 'next/image';
 import NavLinksAdmin from '../lib/nav-links-admin';
+import { useStore } from '@/store';
+
 
 const SideNavAdmin = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { menuAdminIsOpen, setMenuAdminIsOpen } = useStore();
+
+
+  const onClose = () => {
+    setMenuAdminIsOpen(false)
+  }
 
   return (
     <div className="md:flex">
       <div
-        className={`fixed inset-0 z-50 bg-gray-800 text-white w-64 md:static md:translate-x-0 transform ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-300 ease-in-out`}
+        className={`fixed inset-0 z-50 bg-gray-800 text-white w-full md:w-64 md:static md:translate-x-0 transform ${menuAdminIsOpen ? 'translate-x-0' : '-translate-x-full'
+          } transition-transform duration-300 ease-in-out`}
       >
         <div className="p-4 text-lg font-bold flex justify-between items-center">
-          <button className="md:hidden" onClick={() => setIsOpen(false)}>
+          <button className="md:hidden" onClick={onClose}>
             <XIcon className="h-6 w-6" />
           </button>
         </div>
@@ -48,8 +51,8 @@ const SideNavAdmin = () => {
       </div>
 
       <button
-        className="md:hidden fixed top-4 left-4 z-50"
-        onClick={() => setIsOpen(true)}
+        className={`md:hidden fixed top-4 left-4 z-50 ${menuAdminIsOpen && 'hidden'}`}
+        onClick={() => setMenuAdminIsOpen(true)}
       >
         <MenuIcon className="h-6 w-6 text-white" />
       </button>

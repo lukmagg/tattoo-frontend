@@ -12,6 +12,7 @@ type Store = {
   allowArtist: boolean;
   myEventList: Array<TattooEvent>;
   artistList: Array<Artist>;
+  menuAdminIsOpen: boolean;
   setTattooPlace: (newTattooPlace: string) => void;
   setTattooSize: (newTattooSize: string) => void;
   setAllowSite: (newAllowSite: boolean) => void;
@@ -21,6 +22,7 @@ type Store = {
   setAllowCalendar: (newAllowCalendar: boolean) => void;
   setMyEventList: (newMyEventList: Array<TattooEvent>) => void;
   setArtistList: (newArtistList: Array<Artist>) => void;
+  setMenuAdminIsOpen: (newMenuAdminIsOpen: boolean) => void;
 };
 
 export const useStore = create<Store>((set) => ({
@@ -49,6 +51,7 @@ export const useStore = create<Store>((set) => ({
     },
   ],
   artistList: [],
+  menuAdminIsOpen: false,
   setTattooPlace: (newTattooPlace: string) => {
     set(() => ({
       tattooPlace: newTattooPlace,
@@ -92,6 +95,11 @@ export const useStore = create<Store>((set) => ({
   setArtistList: (newArtistList: Array<Artist>) => {
     set(() => ({
       artistList: newArtistList,
+    }));
+  },
+  setMenuAdminIsOpen: (newMenuAdminIsOpen: boolean) => {
+    set(() => ({
+      menuAdminIsOpen: newMenuAdminIsOpen,
     }));
   },
 }));

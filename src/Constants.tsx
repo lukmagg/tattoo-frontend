@@ -29,21 +29,10 @@ interface Data {
   totalCount: number;
 }
 
-interface Books {
-  books: Array<Book>;
-}
+// interface Books {
+//   books: Array<Book>;
+// }
 
-interface Users {
-  users: Array<User>;
-}
-
-interface DataBook {
-  book: Book;
-}
-
-interface DataUser {
-  user: User;
-}
 
 interface Variables {
   id: string | string[];
@@ -123,6 +112,8 @@ export const CREATE_ARTIST = gql`
   }
   ${ARTIST_FRAGMENT}
 `;
+
+
 
 export const TOTAL_COUNT: TypedDocumentNode<Data> = gql`
   query TotalBooks {

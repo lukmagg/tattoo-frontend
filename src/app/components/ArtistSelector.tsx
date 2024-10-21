@@ -1,11 +1,37 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BudgetModal from './BudgetModal';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useStore } from '@/store';
+import { Artist, ARTISTS } from '@/Constants';
+import { useQuery } from '@apollo/client';
 
 const ArtistSelector = () => {
+
+  const { data, error, loading } = useQuery(ARTISTS)
+  const { artistList, setArtistList } = useStore();
+
   const [selectedArtist, setSelectedArtist] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+
+    if (data) {
+      const { artists } = data
+
+      const auxList: Artist[] = []
+
+      artists.forEach((artist: Artist) => {
+        const { name, description, instagram, color } = artist
+        const newArtist = { name, description, instagram, color }
+        auxList.push(newArtist)
+      })
+
+      // we must update global store for re-render component and print cards
+      setArtistList(auxList)
+    }
+  }, [data])
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
@@ -15,6 +41,7 @@ const ArtistSelector = () => {
     openModal();
   };
 
+
   return (
     <>
       <BudgetModal
@@ -22,206 +49,67 @@ const ArtistSelector = () => {
         onRequestClose={closeModal}
         selectedSize={selectedArtist}
       />
-      <div className="flex flex-col items-center h-screen">
-        <div className="flex">
-          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white mr-8">
-            {/* <img
-              className="w-full"
-              src="https://via.placeholder.com/400x200"
-              alt="Imagen de ejemplo"
-            /> */}
-            <div className="px-6 py-4">
-              <div className="text-gray-800 font-bold text-xl mb-2">
-                Mauro Lanza
-              </div>
-              <p className="text-gray-700 text-base">
-                Tatuador local de Ushuaia, el mas crack! con un estilo muy
-                harcord.. Skater nato! y mas cosas que quieras poner del artista
-                para rellenar la card.
-              </p>
-            </div>
-            <div className="px-6 pt-4 pb-2">
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                <Link
-                  legacyBehavior
-                  href="https://www.instagram.com/luk_magg/"
-                  passHref
-                >
-                  <a target="_blank" rel="noopener noreferrer">
-                    Instagram
-                  </a>
-                </Link>
-              </span>
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                <Link
-                  legacyBehavior
-                  href="https://www.instagram.com/luk_magg/"
-                  passHref
-                >
-                  <a target="_blank" rel="noopener noreferrer">
-                    Facebook
-                  </a>
-                </Link>
-              </span>
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                <Link
-                  legacyBehavior
-                  href="https://www.instagram.com/luk_magg/"
-                  passHref
-                >
-                  <a target="_blank" rel="noopener noreferrer">
-                    Tiktok
-                  </a>
-                </Link>
-              </span>
-            </div>
-            <div
-              onClick={() => handleArtistChange('artista 1')}
-              className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer"
-            >
-              <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">
-                Seleccionar
-              </button>
-            </div>
-          </div>
 
-          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
-            {/* <img
-              className="w-full"
-              src="https://via.placeholder.com/400x200"
-              alt="Imagen de ejemplo"
-            /> */}
-            <div className="px-6 py-4">
-              <div className="text-gray-800 font-bold text-xl mb-2">
-                Nombre artista
-              </div>
-              <p className="text-gray-700 text-base">
-                Aquí va una breve descripción del contenido de la tarjeta.
-                Puedes agregar más información o personalizarlo según lo que
-                necesites.
-              </p>
-            </div>
-            <div className="px-6 pt-4 pb-2">
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                #Etiqueta1
-              </span>
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                <Link
-                  legacyBehavior
-                  href="https://www.instagram.com/luk_magg/"
-                  passHref
-                >
-                  <a target="_blank" rel="noopener noreferrer">
-                    Instagram
-                  </a>
-                </Link>
-              </span>
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                #Etiqueta3
-              </span>
-            </div>
-            <div
-              onClick={() => handleArtistChange('artista 1')}
-              className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer"
-            >
-              <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">
-                Seleccionar
-              </button>
-            </div>
-          </div>
-        </div>
+      <div className="flex flex-col md:flex-row items-center">
 
-        <div className="flex mt-8">
-          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white mr-8">
-            {/* <img
-              className="w-full"
-              src="https://via.placeholder.com/400x200"
-              alt="Imagen de ejemplo"
-            /> */}
-            <div className="px-6 py-4">
-              <div className="text-gray-800 font-bold text-xl mb-2">
-                Nombre artista
+        {/* TODO: cambiar los datos hardcodeados por los datos reales de los artistas */}
+        {
+          artistList.map((artist, index) => (
+            <div key={index} className="rounded-md shadow-lg bg-white mt-10 mx-10 md:min-w-[320px]">
+              <Image
+                src="/400x200.png"
+                alt="1009 Logo"
+                className="rounded-t-md" //dark:invert
+                width={400}
+                height={24}
+                priority
+              />
+              <div className="px-6 py-4">
+                <div className="text-gray-800 font-bold text-xl mb-2">
+                  {artist.name}
+                </div>
+                <p className="text-gray-700 text-base min-h-[100px]">
+                  {artist.description}
+                </p>
               </div>
-              <p className="text-gray-700 text-base">
-                Aquí va una breve descripción del contenido de la tarjeta.
-                Puedes agregar más información o personalizarlo según lo que
-                necesites.
-              </p>
-            </div>
-            <div className="px-6 pt-4 pb-2">
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                #Etiqueta1
-              </span>
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                <Link
-                  legacyBehavior
-                  href="https://www.instagram.com/luk_magg/"
-                  passHref
-                >
-                  <a target="_blank" rel="noopener noreferrer">
-                    Instagram
-                  </a>
-                </Link>
-              </span>
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                #Etiqueta3
-              </span>
-            </div>
-            <div
-              onClick={() => handleArtistChange('artista 1')}
-              className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer"
-            >
-              <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">
-                Seleccionar
-              </button>
-            </div>
-          </div>
-          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
-            {/* <img
-              className="w-full"
-              src="https://via.placeholder.com/400x200"
-              alt="Imagen de ejemplo"
-            /> */}
-            <div className="px-6 py-4">
-              <div className="text-gray-800 font-bold text-xl mb-2">
-                Nombre artista
+              <div className="flex items-center justify-center px-6 pt-4 pb-2">
+                <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                  <Link
+                    legacyBehavior
+                    href="https://www.instagram.com/luk_magg/"
+                    passHref
+                  >
+                    <a target="_blank" rel="noopener noreferrer">
+                      Instagram
+                    </a>
+                  </Link>
+                </span>
+                <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
+                  <Link
+                    legacyBehavior
+                    href="https://www.instagram.com/luk_magg/"
+                    passHref
+                  >
+                    <a target="_blank" rel="noopener noreferrer">
+                      Facebook
+                    </a>
+                  </Link>
+                </span>
               </div>
-              <p className="text-gray-700 text-base">
-                Aquí va una breve descripción del contenido de la tarjeta.
-                Puedes agregar más información o personalizarlo según lo que
-                necesites.
-              </p>
+              <div
+                onClick={() => handleArtistChange('artista 1')}
+                className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer"
+              >
+                <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">
+                  Seleccionar
+                </button>
+              </div>
             </div>
-            <div className="px-6 pt-4 pb-2">
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                #Etiqueta1
-              </span>
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                <Link
-                  legacyBehavior
-                  href="https://www.instagram.com/luk_magg/"
-                  passHref
-                >
-                  <a target="_blank" rel="noopener noreferrer">
-                    Instagram
-                  </a>
-                </Link>
-              </span>
-              <span className="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">
-                #Etiqueta3
-              </span>
-            </div>
-            <div
-              onClick={() => handleArtistChange('artista 1')}
-              className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer"
-            >
-              <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">
-                Seleccionar
-              </button>
-            </div>
-          </div>
-        </div>
+          ))
+        }
+
       </div>
+
     </>
   );
 };

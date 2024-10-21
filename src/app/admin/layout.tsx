@@ -1,4 +1,3 @@
-'use client';
 import { ToastContainer } from 'react-toastify';
 import { Suspense } from 'react';
 import Loading from '../dashboard/loading';

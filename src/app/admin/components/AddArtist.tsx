@@ -19,23 +19,25 @@ function AddArtist() {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-
     const formData = new FormData(event.currentTarget)
 
     const data = Object.fromEntries(formData.entries())
 
-    try {
-      const res = await artist({
-        variables: {
-          createArtistInput: data,
-        },
-      })
-      const newArtist = res.data.createArtist
-      setArtistList([...artistList, newArtist])
-    } catch (err) {
-      console.error('Error en la mutación:', err)
-      alert('Hubo un problema al enviar el formulario. Intenta nuevamente.')
+    if (artistList.length < 3) {
+      try {
+        const res = await artist({
+          variables: {
+            createArtistInput: data,
+          },
+        })
+        const newArtist = res.data.createArtist
+        setArtistList([...artistList, newArtist])
+      } catch (err) {
+        console.error('Error en la mutación:', err)
+        alert('Hubo un problema al enviar el formulario. Intenta nuevamente.')
+      }
     }
+
 
 
   }
@@ -99,7 +101,6 @@ function AddArtist() {
               <option value="text-red-700">Rojo</option>
               <option value="text-blue-700">Azul</option>
               <option value="text-green-700">Verde</option>
-              <option value="text-yellow-400">Amarillo</option>
             </select>
           </div>
           {/* Field Instagram */}

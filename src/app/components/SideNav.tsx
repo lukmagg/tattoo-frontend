@@ -1,13 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import {
-  HomeIcon,
-  UserIcon,
-  CogIcon,
   MenuIcon,
   XIcon,
 } from '@heroicons/react/outline';
-import Link from 'next/link';
 import NavLinks from '../lib/nav-links';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -18,12 +14,15 @@ const SideNav = () => {
   const router = useRouter();
 
 
-  const handleDoubleClick = () => router.push('/login');
+  const handleDoubleClick = () => {
+    console.log('handleDoubleClick')
+    router.push('/login');
+  }
 
   return (
     <div className="md:flex">
       <div
-        className={`fixed inset-0 z-50 bg-gray-800 text-white w-64 md:static md:translate-x-0 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`fixed inset-0 z-50 bg-gray-800 text-white w-full md:w-64 md:static md:translate-x-0 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'
           } transition-transform duration-300 ease-in-out`}
       >
         <div className="p-4 text-lg font-bold flex justify-between items-center">
@@ -31,7 +30,7 @@ const SideNav = () => {
             <XIcon className="h-6 w-6" />
           </button>
         </div>
-        <div className="flex flex-col h-full items-center">
+        <div className="flex flex-col pt-12 md:pt-0 h-full items-center">
           <div className="grow">
             <nav className="flex-1">
               <ul>
@@ -40,7 +39,7 @@ const SideNav = () => {
             </nav>
           </div>
 
-          <div className="pb-20" onDoubleClick={handleDoubleClick}>
+          <div className="pb-20" onDoubleClick={handleDoubleClick} onTouchStart={handleDoubleClick}>
             <Image
               src="/without-circle1009.png"
               alt="1009 Logo"
@@ -54,7 +53,7 @@ const SideNav = () => {
       </div>
 
       <button
-        className="md:hidden fixed top-4 left-4 z-50"
+        className={`md:hidden fixed top-4 left-4 z-50 ${isOpen && 'hidden'}`}
         onClick={() => setIsOpen(true)}
       >
         <MenuIcon className="h-6 w-6 text-white" />
