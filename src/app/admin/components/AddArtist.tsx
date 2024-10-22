@@ -1,14 +1,15 @@
 'use client'
 import { FormEvent, useState } from "react"
 import { useMutation } from '@apollo/client'
-import { CREATE_ARTIST } from '@/Constants'
+import { Artist, CREATE_ARTIST } from '@/Constants'
 import { useStore } from '@/store';
+import { availableColor } from "@/app/lib/utils/availableColor";
 
 
 function AddArtist() {
-  const { artistList, setArtistList } = useStore();
+  const { allArtistList, currentArtistList, setAllArtistList, setCurrentArtistList } = useStore();
   const [artist, { data, loading, error }] = useMutation(CREATE_ARTIST);
-  const [selectedColor, setSelectedColor] = useState('text-red-700');
+  const [selectedColor, setSelectedColor] = useState('text-black');
 
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -21,33 +22,46 @@ function AddArtist() {
 
     const formData = new FormData(event.currentTarget)
 
-    const data = Object.fromEntries(formData.entries())
+    const dataEntries = Object.fromEntries(formData.entries())
 
-    if (artistList.length < 3) {
-      try {
-        const res = await artist({
-          variables: {
-            createArtistInput: data,
-          },
-        })
-        const newArtist = res.data.createArtist
-        setArtistList([...artistList, newArtist])
-      } catch (err) {
-        console.error('Error en la mutación:', err)
-        alert('Hubo un problema al enviar el formulario. Intenta nuevamente.')
-      }
+    const isActive = currentArtistList.length < 3 && dataEntries.color !== 'text-black'
+
+    if (currentArtistList.length < 3 && !availableColor(dataEntries.color as string, currentArtistList)) {
+      alert('Color no disponible')
+      return
     }
 
+    const completeArtist = {
+      isActive,
+      ...dataEntries
+    }
 
+    try {
+      const res = await artist({
+        variables: {
+          createArtistInput: completeArtist,
+        },
+      })
+      const createdArtist = res.data.createArtist
 
+      if (completeArtist.isActive) {  // solo agrega el artista a la current list si no hay ya 3 seleccionados
+        setCurrentArtistList([...currentArtistList, createdArtist])
+      }
+
+      setAllArtistList([...allArtistList, createdArtist])
+
+    } catch (err) {
+      console.error('Error en la mutación:', err)
+      alert('Hubo un problema al enviar el formulario. Intenta nuevamente.')
+    }
   }
 
   return (
     <>
-      <div className="my-10">
+      <div>
         <form
           onSubmit={onSubmit}
-          className="text-black max-w-md mx-auto p-6 bg-white shadow-md rounded-md space-y-4"
+          className="text-black max-w-xl mx-auto p-6 bg-white shadow-md rounded-md space-y-4"
         >
           {/* Field Name */}
           <div>
@@ -98,6 +112,7 @@ function AddArtist() {
               className={`${selectedColor} mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
               onChange={handleChange}
             >
+              <option value="text-black">Desactivado</option>
               <option value="text-red-700">Rojo</option>
               <option value="text-blue-700">Azul</option>
               <option value="text-green-700">Verde</option>
@@ -136,3 +151,4 @@ function AddArtist() {
 }
 
 export default AddArtist;
+

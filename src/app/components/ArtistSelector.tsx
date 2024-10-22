@@ -10,7 +10,7 @@ import { useQuery } from '@apollo/client';
 const ArtistSelector = () => {
 
   const { data, error, loading } = useQuery(ARTISTS)
-  const { artistList, setArtistList } = useStore();
+  const { currentArtistList, setCurrentArtistList } = useStore();
 
   const [selectedArtist, setSelectedArtist] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -29,7 +29,7 @@ const ArtistSelector = () => {
       })
 
       // we must update global store for re-render component and print cards
-      setArtistList(auxList)
+      setCurrentArtistList(auxList)
     }
   }, [data])
 
@@ -54,7 +54,7 @@ const ArtistSelector = () => {
 
         {/* TODO: cambiar los datos hardcodeados por los datos reales de los artistas */}
         {
-          artistList.map((artist, index) => (
+          currentArtistList.map((artist, index) => (
             <div key={index} className="rounded-md shadow-lg bg-white mt-10 mx-10 md:min-w-[320px]">
               <Image
                 src="/400x200.png"

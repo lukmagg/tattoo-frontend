@@ -36,7 +36,11 @@ export function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith('/login')) {
     if (token) {
-      return NextResponse.redirect(new URL('/admin', request.url));
+      const decodedToken = jwt.decode(token) as DecodedToken;
+
+      if (decodedToken.exp * 1000 > Date.now()) {
+        return NextResponse.redirect(new URL('/admin', request.url));
+      }
     } else {
       return NextResponse.next();
     }
@@ -44,7 +48,12 @@ export function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith('/admin')) {
     if (token) {
+
       const decodedToken = jwt.decode(token) as DecodedToken;
+
+      if (decodedToken.exp * 1000 < Date.now()) {
+        return NextResponse.redirect(new URL('/login', request.url));
+      }
 
       const isAdmin = decodedToken?.roles.includes('admin');
 

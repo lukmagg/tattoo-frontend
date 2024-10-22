@@ -23,6 +23,7 @@ export interface CardProps {
   instagram: string;
   color: string;
   onClose: () => void; // Si 'onClose' es una función sin retorno
+  onEdit: () => void;
 }
 
 interface Data {
@@ -84,7 +85,7 @@ export const SIGN_UP = gql`
     }
   }
   ${AUTH_RESPONSE_FRAGMENT}
-`;
+`
 
 export const SIGN_IN = gql`
   mutation Signin($signinInput: SigninInput!) {
@@ -93,7 +94,7 @@ export const SIGN_IN = gql`
     }
   }
   ${AUTH_RESPONSE_FRAGMENT}
-`;
+`
 
 export const ARTISTS = gql`
   query Artists {
@@ -102,7 +103,7 @@ export const ARTISTS = gql`
     }
   }
   ${ARTIST_FRAGMENT}
-`;
+`
 
 export const CREATE_ARTIST = gql`
   mutation CreateArtist($createArtistInput: CreateArtistInput!) {
@@ -111,7 +112,25 @@ export const CREATE_ARTIST = gql`
     }
   }
   ${ARTIST_FRAGMENT}
-`;
+`
+
+export const UPDATE_ARTIST = gql`
+  mutation UpdateArtist($updateArtistInput: UpdateArtistInput!) {
+    updateArtist(updateArtistInput: $updateArtistInput) {
+      ...ArtistObjectWhole
+    }
+  }
+  ${ARTIST_FRAGMENT}
+`
+
+export const ACTIVATE_ARTIST = gql`
+  mutation ActivateArtist($id: ID!) {
+    activateArtist(id: $id) {
+      ...ArtistObjectWhole
+    }
+  }
+  ${ARTIST_FRAGMENT}
+`
 
 
 
@@ -119,7 +138,7 @@ export const TOTAL_COUNT: TypedDocumentNode<Data> = gql`
   query TotalBooks {
     totalCount
   }
-`;
+`
 
 // export const CREATE_BOOK = gql`
 //   mutation CreateBook($createBookInput: CreateBookInput!) {

@@ -11,8 +11,10 @@ type Store = {
   allowContact: boolean;
   allowArtist: boolean;
   myEventList: Array<TattooEvent>;
-  artistList: Array<Artist>;
+  allArtistList: Array<Artist>;
+  currentArtistList: Array<Artist>;
   menuAdminIsOpen: boolean;
+  reRender: boolean;
   setTattooPlace: (newTattooPlace: string) => void;
   setTattooSize: (newTattooSize: string) => void;
   setAllowSite: (newAllowSite: boolean) => void;
@@ -21,11 +23,14 @@ type Store = {
   setAllowArtist: (newAllowArtist: boolean) => void;
   setAllowCalendar: (newAllowCalendar: boolean) => void;
   setMyEventList: (newMyEventList: Array<TattooEvent>) => void;
-  setArtistList: (newArtistList: Array<Artist>) => void;
+  setAllArtistList: (newAllArtistList: Array<Artist>) => void;
+  setCurrentArtistList: (newCurrentArtistList: Array<Artist>) => void;
   setMenuAdminIsOpen: (newMenuAdminIsOpen: boolean) => void;
+  setReRender: (newReRender: boolean) => void;
 };
 
 export const useStore = create<Store>((set) => ({
+  reRender: false,
   tattooPlace: '',
   tattooSize: '',
   allowSite: false,
@@ -50,8 +55,14 @@ export const useStore = create<Store>((set) => ({
       title: 'tattoo 3',
     },
   ],
-  artistList: [],
+  allArtistList: [],
+  currentArtistList: [],
   menuAdminIsOpen: false,
+  setReRender: (newReRender: boolean) => {
+    set(() => ({
+      reRender: newReRender,
+    }));
+  },
   setTattooPlace: (newTattooPlace: string) => {
     set(() => ({
       tattooPlace: newTattooPlace,
@@ -92,9 +103,14 @@ export const useStore = create<Store>((set) => ({
       myEventList: newMyEventList,
     }));
   },
-  setArtistList: (newArtistList: Array<Artist>) => {
+  setAllArtistList: (newAllArtistList: Array<Artist>) => {
     set(() => ({
-      artistList: newArtistList,
+      allArtistList: newAllArtistList,
+    }));
+  },
+  setCurrentArtistList: (newCurrentArtistList: Array<Artist>) => {
+    set(() => ({
+      currentArtistList: newCurrentArtistList,
     }));
   },
   setMenuAdminIsOpen: (newMenuAdminIsOpen: boolean) => {
