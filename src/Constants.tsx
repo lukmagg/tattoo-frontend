@@ -132,6 +132,15 @@ export const ACTIVATE_ARTIST = gql`
   ${ARTIST_FRAGMENT}
 `
 
+export const DEACTIVATE_ARTIST = gql`
+  mutation DeactivateArtist($id: ID!) {
+    deactivateArtist(id: $id) {
+      ...ArtistObjectWhole
+    }
+  }
+  ${ARTIST_FRAGMENT}
+`
+
 
 
 export const TOTAL_COUNT: TypedDocumentNode<Data> = gql`

@@ -3,6 +3,7 @@ import { parseArtistColor } from '@/app/lib/utils/parseArtistColor';
 import { PencilIcon, XIcon } from '@heroicons/react/solid';
 
 function ArtistCard({
+    id,
     name,
     description,
     instagram,

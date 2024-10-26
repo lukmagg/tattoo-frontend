@@ -40,8 +40,8 @@ export const useStore = create<Store>((set) => ({
   allowArtist: false,
   myEventList: [
     {
-      start: dayjs('2024-07-18T11:00:00').toDate(),
-      end: dayjs('2024-07-18T14:10:00').toDate(),
+      start: dayjs('2024-10-18T11:00:00').toDate(),
+      end: dayjs('2024-10-18T14:10:00').toDate(),
       title: 'tattoo 1',
     },
     {

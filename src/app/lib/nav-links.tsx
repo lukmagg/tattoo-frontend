@@ -3,7 +3,8 @@ import {
   HomeIcon,
   UserIcon,
   CalendarIcon,
-  AdjustmentsIcon,
+  PencilIcon,
+  PhotographIcon
 } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -15,8 +16,8 @@ import { useStore } from '@/store';
 const links = [
   { name: 'Inicio', href: '/dashboard', icon: HomeIcon },
   { name: 'Lugar tattoo', href: '/dashboard/site', icon: UserIcon },
-  { name: 'Tamaño tattoo', href: '/dashboard/size', icon: AdjustmentsIcon },
-  { name: 'Artista', href: '/dashboard/artist', icon: CalendarIcon },
+  { name: 'Tamaño tattoo', href: '/dashboard/size', icon: PhotographIcon },
+  { name: 'Artista', href: '/dashboard/artist', icon: PencilIcon },
   { name: 'Calendario', href: '/dashboard/calendar', icon: CalendarIcon },
 ];
 

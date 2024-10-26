@@ -3,6 +3,7 @@ import {
   HomeIcon,
   UserIcon,
   LogoutIcon,
+  CurrencyDollarIcon
 } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -14,6 +15,7 @@ import { useStore } from '@/store';
 const links = [
   { name: 'Inicio', href: '/admin', icon: HomeIcon },
   { name: 'Artistas', href: '/admin/artists', icon: UserIcon },
+  { name: 'Precios', href: '/admin/prices', icon: CurrencyDollarIcon },
   { name: "Sign out", href: "/logout", icon: LogoutIcon },
 ];
 

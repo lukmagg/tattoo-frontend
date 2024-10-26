@@ -25,7 +25,9 @@ const ArtistSelector = () => {
       artists.forEach((artist: Artist) => {
         const { name, description, instagram, color } = artist
         const newArtist = { name, description, instagram, color }
-        auxList.push(newArtist)
+        if (artist.isActive) {
+          auxList.push(newArtist)
+        }
       })
 
       // we must update global store for re-render component and print cards

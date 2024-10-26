@@ -33,13 +33,15 @@ const MyCalendar = () => {
     const formattedTime = `${String(startHours).padStart(2, '0')}:${String(startMinutes).padStart(2, '0')}:${String(startSeconds).padStart(2, '0')}`;
   };
 
+  // Esta funcion se ejecuta cuando seleccionamos un slot vacio
   const handleSelectSlot = ({ start, end }: SlotInfo) => {
+
     start.setHours(14);
 
     end = dayjs(start).add(2, 'hour').toDate();
 
     const startHour = start.getHours();
-    const startMin = start.getMinutes();
+    const startMin = start.getMinutes()
 
     const endHour = end.getHours();
     const endMin = end.getMinutes();
@@ -55,7 +57,7 @@ const MyCalendar = () => {
     };
 
     setMyEventList([...myEventList, newEvent]);
-  };
+  }
 
   const eventComponent = {
     event: (props: TattooEvent) => {

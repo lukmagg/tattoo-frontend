@@ -11,16 +11,16 @@ export default function Page() {
   // TODO: cuando sepa como borrar las cookies desde el lado del servidor,
   // quitar el use client y el useEffect en este componente y convertirlo
   // a un server component
-  useEffect(() => {
-    const myCookies = [
-      'allow-calendar',
-      'allow-size',
-      'allow-site',
-      'allow-form-contact',
-      'allow-artist',
-    ];
-    myCookies.forEach((cookie) => Cookies.remove(cookie));
-  }, []);
+  // useEffect(() => {
+  //   const myCookies = [
+  //     'allow-calendar',
+  //     'allow-size',
+  //     'allow-site',
+  //     'allow-form-contact',
+  //     'allow-artist',
+  //   ];
+  //   myCookies.forEach((cookie) => Cookies.remove(cookie));
+  // }, []);
 
   const handleClick = () => {
     setAllowSite(true);

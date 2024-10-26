@@ -31,8 +31,11 @@ const AllArtistSelector = () => {
         console.error('Error en la mutación:', err)
         alert('Hubo un problema al enviar el formulario. Intenta nuevamente.')
       }
+    } else {
+      alert("Lista completa de artistas en Ushuaia")
     }
   }
+
 
 
 
