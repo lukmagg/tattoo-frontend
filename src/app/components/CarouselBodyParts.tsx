@@ -1,18 +1,18 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { Navigation, Scrollbar, A11y } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Swiper as SwiperType } from 'swiper';
-import Image from 'next/image';
-import { useStore } from '@/store';
-import Cookies from 'js-cookie';
+'use client'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { Navigation, Scrollbar, A11y } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper as SwiperType } from 'swiper'
+import Image from 'next/image'
+import { useStore } from '@/store'
+import Cookies from 'js-cookie'
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
 
 const images = [
   { src: '/head.png', info: 'Cabeza' },
@@ -25,24 +25,24 @@ const images = [
   { src: '/thigh.png', info: 'Muslo' },
   { src: '/calf.png', info: 'Gemelo' },
   { src: '/foot.png', info: 'Pie' },
-];
+]
 
 const CarouselBodyParts = () => {
-  const { setTattooPlace, setAllowSize } = useStore();
+  const { setTattooPlace, setAllowSize } = useStore()
 
-  const [activeIndex, setActiveIndex] = useState(0);
-  const router = useRouter();
+  const [activeIndex, setActiveIndex] = useState(0)
+  const router = useRouter()
 
   const handleClick = (bodyPart: string) => {
-    setTattooPlace(bodyPart);
-    setAllowSize(true);
-    Cookies.set('allow-size', '1');
-    router.push('/dashboard/size');
-  };
+    setTattooPlace(bodyPart)
+    setAllowSize(true)
+    Cookies.set('allow-size', '1')
+    router.push('/dashboard/size')
+  }
 
   const handleSlideChange = (swiper: SwiperType) => {
-    setActiveIndex(swiper.activeIndex);
-  };
+    setActiveIndex(swiper.activeIndex)
+  }
 
   return (
     <>
@@ -80,7 +80,7 @@ const CarouselBodyParts = () => {
         </button>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default CarouselBodyParts;
+export default CarouselBodyParts

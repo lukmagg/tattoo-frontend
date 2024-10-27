@@ -1,42 +1,49 @@
-import { TypedDocumentNode, gql } from '@apollo/client';
-import { AUTH_RESPONSE_FRAGMENT, USER_FRAGMENT, ARTIST_FRAGMENT } from './app/apollo/fragments';
-
-
+import { TypedDocumentNode, gql } from '@apollo/client'
+import {
+  AUTH_RESPONSE_FRAGMENT,
+  USER_FRAGMENT,
+  ARTIST_FRAGMENT,
+} from './app/apollo/fragments'
 
 // INTERFACES
+export interface BudgetModalProps {
+  isOpen: boolean
+  selectedSize: string
+  onRequestClose: OnRequestCloseType
+}
+
 export interface TattooEvent {
-  title: string;
-  start: Date;
-  end: Date;
+  title: string
+  start: Date
+  end: Date
 }
 
 export interface DecodedToken {
-  id: string;
-  roles: [string];
-  iat: number;
-  exp: number;
+  id: string
+  roles: [string]
+  iat: number
+  exp: number
 }
 
 export interface CardProps {
-  name: string;
-  description: string;
-  instagram: string;
-  color: string;
-  onClose: () => void; // Si 'onClose' es una función sin retorno
-  onEdit: () => void;
+  name: string
+  description: string
+  instagram: string
+  color: string
+  onClose: () => void // Si 'onClose' es una función sin retorno
+  onEdit: () => void
 }
 
 interface Data {
-  totalCount: number;
+  totalCount: number
 }
 
 // interface Books {
 //   books: Array<Book>;
 // }
 
-
 interface Variables {
-  id: string | string[];
+  id: string | string[]
 }
 
 // ENUMS
@@ -45,7 +52,6 @@ interface Variables {
 //   DISPONIBLE = 'DISPONIBLE',
 // }
 
-
 // export interface User {
 //   id?: string;
 //   name: string;
@@ -53,27 +59,27 @@ interface Variables {
 //   //phone?: string;
 //   roles?: string[];
 //   typeUser: TypeUser;
-//   grupo?: Group; 
+//   grupo?: Group;
 //   isActive?: boolean;
 //   createdAt?: Date;
 // }
 
 export interface Artist {
-  id?: string;
-  name: string;
-  description: string;
-  color: string;
-  instagram: string;
-  eventList?: TattooEvent[];
-  isActive?: boolean;
-  createdAt?: Date;
+  id?: string
+  name: string
+  description: string
+  color: string
+  instagram: string
+  eventList?: TattooEvent[]
+  isActive?: boolean
+  createdAt?: Date
 }
 
 export interface DecodedToken {
-  id: string;
-  roles: [string];
-  iat: number;
-  exp: number;
+  id: string
+  roles: [string]
+  iat: number
+  exp: number
 }
 
 // QUERIES AND MUTATIONS
@@ -141,8 +147,6 @@ export const DEACTIVATE_ARTIST = gql`
   ${ARTIST_FRAGMENT}
 `
 
-
-
 export const TOTAL_COUNT: TypedDocumentNode<Data> = gql`
   query TotalBooks {
     totalCount
@@ -192,7 +196,7 @@ export const USERS: TypedDocumentNode<Users> = gql`
     }
   }
   ${USER_FRAGMENT}
-`;
+`
 
 export const USER: TypedDocumentNode<DataUser, Variables> = gql`
   query User($id: ID!) {
@@ -201,7 +205,7 @@ export const USER: TypedDocumentNode<DataUser, Variables> = gql`
     }
   }
   ${USER_FRAGMENT}
-`;
+`
 
 export const CREATE_USER = gql`
   mutation CreateUser($createUserInput: CreateUserInput!) {
@@ -210,7 +214,7 @@ export const CREATE_USER = gql`
     }
   }
   ${USER_FRAGMENT}
-`;
+`
 
 export const UPDATE_USER = gql`
   mutation UpdateUser($updateUserInput: UpdateUserInput!) {
@@ -219,9 +223,7 @@ export const UPDATE_USER = gql`
     }
   }
   ${USER_FRAGMENT}
-`;
-
-
+`
 
 // Gloabl constants
 export const hours = [
@@ -240,7 +242,7 @@ export const hours = [
   { date: '20:00', index: 20 },
   { date: '21:00', index: 21 },
   { date: '22:00', index: 22 },
-];
+]
 
 //no modificar probar con estos numero y cambiar otra cosa si no funciona asi
 export const months = [
@@ -256,10 +258,9 @@ export const months = [
   { date: 'Octubre', number: 9 },
   { date: 'Noviembre', number: 10 },
   { date: 'Diciembre', number: 11 },
-];
-
+]
 
 // Custom types
 
-export type OnRequestCloseType = () => void;
-export type OnCancelType = () => void;
+export type OnRequestCloseType = () => void
+export type OnCancelType = () => void

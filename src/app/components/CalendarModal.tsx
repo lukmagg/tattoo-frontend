@@ -1,14 +1,14 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
-import Modal from 'react-modal';
-import { OnRequestCloseType } from '@/Constants';
+'use client'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
+import Modal from 'react-modal'
+import { OnRequestCloseType } from '@/Constants'
 
 interface CalendarModalProps {
-  isOpen: boolean;
-  selectedDay: Date;
-  onRequestClose: OnRequestCloseType;
+  isOpen: boolean
+  selectedDay: Date
+  onRequestClose: OnRequestCloseType
 }
 
 const CalendarModal = ({
@@ -16,13 +16,13 @@ const CalendarModal = ({
   onRequestClose,
   selectedDay,
 }: CalendarModalProps) => {
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0)
 
-  const router = useRouter();
+  const router = useRouter()
 
   const handleAccept = (day: string) => {
-    console.log(day);
-  };
+    console.log(day)
+  }
 
   return (
     <div>
@@ -42,6 +42,11 @@ const CalendarModal = ({
             transform: 'translate(-50%, -50%)',
             background: 'rgb(31 41 55)',
             borderRadius: 10,
+            zIndex: 100,
+          },
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fondo semi-transparente
+            zIndex: 90, // capa debajo del modal
           },
         }}
       >
@@ -49,7 +54,7 @@ const CalendarModal = ({
           <div className="flex h-full flex-col items-center">
             <div className="grow">
               <h2 className="text-white">
-                Dia seleccionado: {selectedDay.getHours()}
+                Dia seleccionado: {selectedDay.getFullYear()}
               </h2>
             </div>
             <div className="">
@@ -70,7 +75,7 @@ const CalendarModal = ({
         </div>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default CalendarModal;
+export default CalendarModal

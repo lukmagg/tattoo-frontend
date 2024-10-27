@@ -1,36 +1,39 @@
-import dayjs from 'dayjs';
-import { Artist, TattooEvent } from '@/Constants';
-import { create } from 'zustand';
+import dayjs from 'dayjs'
+import { Artist, TattooEvent } from '@/Constants'
+import { create } from 'zustand'
 
 type Store = {
-  tattooPlace: string;
-  tattooSize: string;
-  allowSite: boolean;
-  allowSize: boolean;
-  allowCalendar: boolean;
-  allowContact: boolean;
-  allowArtist: boolean;
-  myEventList: Array<TattooEvent>;
-  allArtistList: Array<Artist>;
-  currentArtistList: Array<Artist>;
-  menuAdminIsOpen: boolean;
-  reRender: boolean;
-  setTattooPlace: (newTattooPlace: string) => void;
-  setTattooSize: (newTattooSize: string) => void;
-  setAllowSite: (newAllowSite: boolean) => void;
-  setAllowSize: (newAllowSize: boolean) => void;
-  setAllowContact: (newAllowContact: boolean) => void;
-  setAllowArtist: (newAllowArtist: boolean) => void;
-  setAllowCalendar: (newAllowCalendar: boolean) => void;
-  setMyEventList: (newMyEventList: Array<TattooEvent>) => void;
-  setAllArtistList: (newAllArtistList: Array<Artist>) => void;
-  setCurrentArtistList: (newCurrentArtistList: Array<Artist>) => void;
-  setMenuAdminIsOpen: (newMenuAdminIsOpen: boolean) => void;
-  setReRender: (newReRender: boolean) => void;
-};
+  selectedArtist: string
+  selectedSize: string
+  tattooPlace: string
+  tattooSize: string
+  allowSite: boolean
+  allowSize: boolean
+  allowCalendar: boolean
+  allowContact: boolean
+  allowArtist: boolean
+  myEventList: Array<TattooEvent>
+  allArtistList: Array<Artist>
+  currentArtistList: Array<Artist>
+  menuAdminIsOpen: boolean
+  setSelectedArtist: (newSelectedArtist: string) => void
+  setSelectedSize: (newSelectedSize: string) => void
+  setTattooPlace: (newTattooPlace: string) => void
+  setTattooSize: (newTattooSize: string) => void
+  setAllowSite: (newAllowSite: boolean) => void
+  setAllowSize: (newAllowSize: boolean) => void
+  setAllowContact: (newAllowContact: boolean) => void
+  setAllowArtist: (newAllowArtist: boolean) => void
+  setAllowCalendar: (newAllowCalendar: boolean) => void
+  setMyEventList: (newMyEventList: Array<TattooEvent>) => void
+  setAllArtistList: (newAllArtistList: Array<Artist>) => void
+  setCurrentArtistList: (newCurrentArtistList: Array<Artist>) => void
+  setMenuAdminIsOpen: (newMenuAdminIsOpen: boolean) => void
+}
 
 export const useStore = create<Store>((set) => ({
-  reRender: false,
+  selectedArtist: '',
+  selectedSize: '',
   tattooPlace: '',
   tattooSize: '',
   allowSite: false,
@@ -58,64 +61,69 @@ export const useStore = create<Store>((set) => ({
   allArtistList: [],
   currentArtistList: [],
   menuAdminIsOpen: false,
-  setReRender: (newReRender: boolean) => {
+  setSelectedArtist: (newSelectedArtist: string) => {
     set(() => ({
-      reRender: newReRender,
-    }));
+      selectedArtist: newSelectedArtist,
+    }))
+  },
+  setSelectedSize: (newSelectedSize: string) => {
+    set(() => ({
+      selectedSize: newSelectedSize,
+    }))
   },
   setTattooPlace: (newTattooPlace: string) => {
     set(() => ({
       tattooPlace: newTattooPlace,
-    }));
+    }))
   },
   setTattooSize: (newTattooSize: string) => {
     set(() => ({
-      tattooPlace: newTattooSize,
-    }));
+      tattooSize: newTattooSize,
+    }))
   },
   setAllowSite: (newAllowSite: boolean) => {
     set(() => ({
       allowSite: newAllowSite,
-    }));
+    }))
   },
   setAllowSize: (newAllowSize: boolean) => {
     set(() => ({
       allowSize: newAllowSize,
-    }));
+    }))
   },
   setAllowCalendar: (newAllowCalendar: boolean) => {
     set(() => ({
       allowCalendar: newAllowCalendar,
-    }));
+    }))
   },
   setAllowArtist: (newAllowArtist: boolean) => {
     set(() => ({
       allowArtist: newAllowArtist,
-    }));
+    }))
   },
   setAllowContact: (newAllowContact: boolean) => {
     set(() => ({
       allowContact: newAllowContact,
-    }));
+    }))
   },
   setMyEventList: (newMyEventList: Array<TattooEvent>) => {
     set(() => ({
       myEventList: newMyEventList,
-    }));
+    }))
   },
   setAllArtistList: (newAllArtistList: Array<Artist>) => {
     set(() => ({
       allArtistList: newAllArtistList,
-    }));
+    }))
   },
   setCurrentArtistList: (newCurrentArtistList: Array<Artist>) => {
     set(() => ({
       currentArtistList: newCurrentArtistList,
-    }));
+    }))
   },
   setMenuAdminIsOpen: (newMenuAdminIsOpen: boolean) => {
     set(() => ({
       menuAdminIsOpen: newMenuAdminIsOpen,
-    }));
+    }))
   },
-}));
+}))
