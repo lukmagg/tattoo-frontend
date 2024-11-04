@@ -1,21 +1,28 @@
 'use client'
-import { FormEvent, useState } from "react"
+import { FormEvent, useState, useRef } from 'react'
 import { useMutation } from '@apollo/client'
-import { Artist, CREATE_ARTIST } from '@/Constants'
-import { useStore } from '@/store';
-import { availableColor } from "@/app/lib/utils/availableColor";
-
+import { CREATE_ARTIST } from '@/Constants'
+import { useStore } from '@/store'
+import { availableColor } from '@/app/lib/utils/availableColor'
+import { initArtistHours } from '@/app/lib/utils/initArtistHours'
 
 function AddArtist() {
-  const { allArtistList, currentArtistList, setAllArtistList, setCurrentArtistList } = useStore();
-  const [artist, { data, loading, error }] = useMutation(CREATE_ARTIST);
-  const [selectedColor, setSelectedColor] = useState('text-black');
+  const {
+    allArtistList,
+    currentArtistList,
+    setAllArtistList,
+    setCurrentArtistList,
+  } = useStore()
+  const [selectedColor, setSelectedColor] = useState('text-black')
+  const [artist, { data, loading, error }] = useMutation(CREATE_ARTIST)
 
+  // Form reference
+  const formRef = useRef<HTMLFormElement>(null)
 
+  // Functions
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedColor(event.target.value);
-  };
-
+    setSelectedColor(event.target.value)
+  }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -24,16 +31,22 @@ function AddArtist() {
 
     const dataEntries = Object.fromEntries(formData.entries())
 
-    const isActive = currentArtistList.length < 3 && dataEntries.color !== 'text-black'
+    const isActive =
+      currentArtistList.length < 3 && dataEntries.color !== 'text-black'
 
-    if (currentArtistList.length < 3 && !availableColor(dataEntries.color as string, currentArtistList)) {
+    if (
+      currentArtistList.length < 3 &&
+      !availableColor(dataEntries.color as string, currentArtistList)
+    ) {
       alert('Color no disponible')
       return
     }
 
     const completeArtist = {
       isActive,
-      ...dataEntries
+      //eventList: initArtistHours(),
+      eventList: [],
+      ...dataEntries,
     }
 
     try {
@@ -44,12 +57,19 @@ function AddArtist() {
       })
       const createdArtist = res.data.createArtist
 
-      if (completeArtist.isActive) {  // solo agrega el artista a la current list si no hay ya 3 seleccionados
+      if (completeArtist.isActive) {
+        // solo agrega el artista a la current list si no hay ya 3 seleccionados
         setCurrentArtistList([...currentArtistList, createdArtist])
       }
 
       setAllArtistList([...allArtistList, createdArtist])
 
+      alert('Artista agregado correctamente!')
+
+      if (formRef.current) {
+        formRef.current.reset() // Restablece todos los campos a su valor inicial
+        setSelectedColor('text-black')
+      }
     } catch (err) {
       console.error('Error en la mutación:', err)
       alert('Hubo un problema al enviar el formulario. Intenta nuevamente.')
@@ -61,6 +81,7 @@ function AddArtist() {
       <div>
         <form
           onSubmit={onSubmit}
+          ref={formRef}
           className="text-black max-w-xl mx-auto p-6 bg-white shadow-md rounded-md space-y-4"
         >
           {/* Field Name */}
@@ -144,11 +165,10 @@ function AddArtist() {
               Enviar
             </button>
           </div>
-        </form >
-      </div >
+        </form>
+      </div>
     </>
-  );
+  )
 }
 
-export default AddArtist;
-
+export default AddArtist

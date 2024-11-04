@@ -6,6 +6,13 @@ import {
 } from './app/apollo/fragments'
 
 // INTERFACES
+
+export interface CalendarModalProps {
+  isOpen: boolean
+  selectedDate: Date
+  onRequestClose: OnRequestCloseType
+}
+
 export interface BudgetModalProps {
   isOpen: boolean
   selectedSize: string
@@ -16,6 +23,7 @@ export interface TattooEvent {
   title: string
   start: Date
   end: Date
+  isBooked: boolean
 }
 
 export interface DecodedToken {
@@ -47,6 +55,11 @@ interface Variables {
 }
 
 // ENUMS
+export enum EstimatedTime {
+  small = 1800000, // milisegundos
+  medium = 10800000,
+  large = 21600000,
+}
 // export enum Lend {
 //   PRESTADO = 'PRESTADO',
 //   DISPONIBLE = 'DISPONIBLE',

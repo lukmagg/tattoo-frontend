@@ -1,10 +1,10 @@
 'use client'
+import { useState } from 'react'
 import { Calendar, dayjsLocalizer, SlotInfo } from 'react-big-calendar'
 import dayjs from 'dayjs'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'dayjs/locale/es'
 import { TattooEvent } from '@/Constants'
-import { useState } from 'react'
 import CalendarModal from './CalendarModal'
 import { useStore } from '@/store'
 
@@ -12,10 +12,11 @@ dayjs.locale('es')
 const localizer = dayjsLocalizer(dayjs)
 
 const MyCalendar = () => {
-  const { myEventList, setMyEventList } = useStore()
+  const { myEventList, selectedDate, setMyEventList, setSelectedDate } =
+    useStore()
 
   const [view, setView] = useState<'month' | 'day'>('month')
-  const [date, setDate] = useState(new Date())
+  //const [date, setDate] = useState(new Date())
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const openModal = () => setModalIsOpen(true)
@@ -36,29 +37,10 @@ const MyCalendar = () => {
   }
 
   // Esta funcion se ejecuta cuando seleccionamos un slot vacio
-  const handleSelectSlot = ({ start, end }: SlotInfo) => {
-    console.log(date)
-    start.setHours(14)
+  const handleSelectSlot = ({ start }: SlotInfo) => {
+    setSelectedDate(start)
 
-    end = dayjs(start).add(2, 'hour').toDate()
-
-    const startHour = start.getHours()
-    const startMin = start.getMinutes()
-
-    const endHour = end.getHours()
-    const endMin = end.getMinutes()
-
-    // TODO: preguntar al cliente si quiere reservar en tal fecha,
-    // si elije que si, enviar OTP luego, agendar, si elige que no, no agendar y volver al calendario.
-    // openModal()
-
-    const newEvent = {
-      start: start,
-      end: end,
-      title: `${startHour}hs / ${endHour}hs`,
-    }
-
-    setMyEventList([...myEventList, newEvent])
+    openModal()
   }
 
   const eventComponent = {
@@ -76,7 +58,7 @@ const MyCalendar = () => {
       <CalendarModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        selectedDay={date}
+        selectedDate={selectedDate}
         // TODO: aca van los horarios disponibles del artista seleccionado anteriormente
       />
 
@@ -87,7 +69,7 @@ const MyCalendar = () => {
           events={myEventList}
           startAccessor="start"
           endAccessor="end"
-          date={date}
+          date={selectedDate}
           views={['month', 'day']}
           defaultView="month"
           view={view}
@@ -100,10 +82,10 @@ const MyCalendar = () => {
           //components={eventComponent}
           onNavigate={(newDate) => {
             // Esto permite que los botones Today, Next, y Back actualicen la fecha
-            setDate(newDate)
+            setSelectedDate(newDate)
           }}
           onSelectEvent={handleSelectEvent}
-          onSelectSlot={openModal}
+          onSelectSlot={handleSelectSlot}
         />
       </div>
     </>

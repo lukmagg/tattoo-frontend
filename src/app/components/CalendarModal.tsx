@@ -1,29 +1,66 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Cookies from 'js-cookie'
 import Modal from 'react-modal'
-import { OnRequestCloseType } from '@/Constants'
+import { CalendarModalProps, OnRequestCloseType } from '@/Constants'
+import { capitalizeFirstLetter } from '../lib/utils/capitalizeFirstLetter'
+import generateTimeOptions from '../lib/utils/generateTimeOptions'
+import { useStore } from '@/store'
+import createNewEvent from '../lib/utils/createNewEvent'
 
-interface CalendarModalProps {
-  isOpen: boolean
-  selectedDay: Date
-  onRequestClose: OnRequestCloseType
-}
+const CalendarModal = ({ isOpen, onRequestClose }: CalendarModalProps) => {
+  const {
+    tattooSize,
+    selectedArtist,
+    selectedDate,
+    setTattooSize,
+    setSelectedArtist,
+    setSelectedDate,
+  } = useStore()
 
-const CalendarModal = ({
-  isOpen,
-  onRequestClose,
-  selectedDay,
-}: CalendarModalProps) => {
   const [totalPrice, setTotalPrice] = useState(0)
 
   const router = useRouter()
 
-  const handleAccept = (day: string) => {
-    console.log(day)
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newDate: Date = selectedDate
+    const hour = event.target.value.slice(0, 2)
+    const min = event.target.value.slice(3, 5)
+
+    newDate.setHours(parseInt(hour), parseInt(min))
+
+    // actualizo selectedDate del store
+    setSelectedDate(newDate)
   }
 
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
+    // crear nuevo tattoo
+    const newEvent = createNewEvent(tattooSize, selectedDate)
+
+    console.log(JSON.stringify(newEvent, null, 2))
+
+    // agendar el nuevo evento en el eventList del artista
+
+    // const formData = new FormData(event.currentTarget)
+
+    // const dataEntries = Object.fromEntries(formData.entries())
+
+    // console.log(dataEntries)
+  }
+
+  const dayOptions = { weekday: 'long' }
+  const monthOptions = { month: 'long' }
+
+  const timeOptions = generateTimeOptions()
+
+  const title = `${capitalizeFirstLetter(
+    selectedDate.toLocaleDateString('es-ES', dayOptions)
+  )}, ${selectedDate.getDate()} ${selectedDate.toLocaleDateString(
+    'es-ES',
+    monthOptions
+  )}`
   return (
     <div>
       <Modal
@@ -52,14 +89,46 @@ const CalendarModal = ({
       >
         <div className="p-4 h-[350px] max-w-sm bg-white shadow dark:bg-gray-800">
           <div className="flex h-full flex-col items-center">
-            <div className="grow">
-              <h2 className="text-white">
-                Dia seleccionado: {selectedDay.getFullYear()}
-              </h2>
-            </div>
-            <div className="">
+            <form
+              onSubmit={onSubmit}
+              className="text-black max-w-xl mx-auto p-6 bg-white shadow-md rounded-md space-y-4"
+            >
+              {/* Field Selected Date */}
+              <div>
+                <label
+                  htmlFor="date"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  {title}
+                </label>
+              </div>
+
+              {/* Field Horario */}
+              <div>
+                <label
+                  htmlFor="color"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Horario
+                </label>
+                <select
+                  id="time"
+                  name="time"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  onChange={handleChange}
+                >
+                  <option value="">Seleccione una hora</option>
+                  {timeOptions.map((time, index) => (
+                    <option key={index} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Aceptar y Cerrar Buttons */}
               <button
-                onClick={() => handleAccept(selectedDay.getHours().toString())}
+                type="submit"
                 className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Aceptar
@@ -70,7 +139,7 @@ const CalendarModal = ({
               >
                 Cerrar
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </Modal>

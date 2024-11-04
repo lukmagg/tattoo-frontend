@@ -1,12 +1,12 @@
-'use client';
-import Cookies from 'js-cookie';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useStore } from '@/store';
+'use client'
+import Cookies from 'js-cookie'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useStore } from '@/store'
 
 export default function Page() {
-  const { setAllowSite } = useStore();
-  const router = useRouter();
+  const { setAllowSite } = useStore()
+  const router = useRouter()
 
   // TODO: cuando sepa como borrar las cookies desde el lado del servidor,
   // quitar el use client y el useEffect en este componente y convertirlo
@@ -23,13 +23,13 @@ export default function Page() {
   // }, []);
 
   const handleClick = () => {
-    setAllowSite(true);
-    router.push('/dashboard/site');
-  };
+    setAllowSite(true)
+    router.push('/dashboard/site')
+  }
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center mt-[200px] md:mt-20 text-3xl m-auto flex-1">
+      <div className="flex flex-col items-center justify-center mt-[200px] md:mt-[240px] text-3xl m-auto flex-1">
         <p className="text-center leading-loose">
           El sistema generara un presupuesto
         </p>
@@ -46,5 +46,5 @@ export default function Page() {
         </button>
       </div>
     </>
-  );
+  )
 }

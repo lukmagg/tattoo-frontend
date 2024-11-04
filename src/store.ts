@@ -5,6 +5,7 @@ import { create } from 'zustand'
 type Store = {
   selectedArtist: string
   selectedSize: string
+  selectedDate: Date
   tattooPlace: string
   tattooSize: string
   allowSite: boolean
@@ -18,6 +19,7 @@ type Store = {
   menuAdminIsOpen: boolean
   setSelectedArtist: (newSelectedArtist: string) => void
   setSelectedSize: (newSelectedSize: string) => void
+  setSelectedDate: (newSelectedDate: Date) => void
   setTattooPlace: (newTattooPlace: string) => void
   setTattooSize: (newTattooSize: string) => void
   setAllowSite: (newAllowSite: boolean) => void
@@ -34,6 +36,7 @@ type Store = {
 export const useStore = create<Store>((set) => ({
   selectedArtist: '',
   selectedSize: '',
+  selectedDate: new Date(),
   tattooPlace: '',
   tattooSize: '',
   allowSite: false,
@@ -46,16 +49,19 @@ export const useStore = create<Store>((set) => ({
       start: dayjs('2024-10-18T11:00:00').toDate(),
       end: dayjs('2024-10-18T14:10:00').toDate(),
       title: 'tattoo 1',
+      isBooked: true,
     },
     {
       start: dayjs('2024-07-23T08:00:00').toDate(),
       end: dayjs('2024-07-23T10:00:00').toDate(),
       title: 'tattoo 2',
+      isBooked: true,
     },
     {
       start: dayjs('2024-07-23T15:00:00').toDate(),
       end: dayjs('2024-07-23T17:00:00').toDate(),
       title: 'tattoo 3',
+      isBooked: true,
     },
   ],
   allArtistList: [],
@@ -69,6 +75,11 @@ export const useStore = create<Store>((set) => ({
   setSelectedSize: (newSelectedSize: string) => {
     set(() => ({
       selectedSize: newSelectedSize,
+    }))
+  },
+  setSelectedDate: (newSelectedDate: Date) => {
+    set(() => ({
+      selectedDate: newSelectedDate,
     }))
   },
   setTattooPlace: (newTattooPlace: string) => {

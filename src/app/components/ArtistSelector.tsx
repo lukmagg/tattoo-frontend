@@ -1,21 +1,26 @@
 'use client'
 import { useEffect, useState } from 'react'
-import BudgetModal from './BudgetModal'
+import { useQuery } from '@apollo/client'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useStore } from '@/store'
 import { Artist, ARTISTS } from '@/Constants'
-import { useQuery } from '@apollo/client'
+import BudgetModal from './BudgetModal'
 
 const ArtistSelector = () => {
   const { data, error, loading } = useQuery(ARTISTS)
-  const { tattooSize, currentArtistList, setCurrentArtistList } = useStore()
+  const {
+    tattooSize,
+    selectedArtist,
+    currentArtistList,
+    setCurrentArtistList,
+    setSelectedArtist,
+  } = useStore()
 
-  const [selectedArtist, setSelectedArtist] = useState('')
+  // const [selectedArtist, setSelectedArtist] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   useEffect(() => {
-    console.log('tattooSize: ' + tattooSize)
     if (data) {
       const { artists } = data
 
@@ -98,7 +103,7 @@ const ArtistSelector = () => {
               </span>
             </div>
             <div
-              onClick={() => handleArtistChange('artista 1')}
+              onClick={() => handleArtistChange(artist.instagram)}
               className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer"
             >
               <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">
