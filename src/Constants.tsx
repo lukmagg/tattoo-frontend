@@ -78,12 +78,12 @@ export enum EstimatedTime {
 // }
 
 export interface Artist {
-  id?: string
+  id: string
   name: string
   description: string
   color: string
   instagram: string
-  eventList?: TattooEvent[]
+  eventList: TattooEvent[]
   isActive?: boolean
   createdAt?: Date
 }
@@ -115,6 +115,15 @@ export const SIGN_IN = gql`
   ${AUTH_RESPONSE_FRAGMENT}
 `
 
+export const ARTIST = gql`
+  mutation GetArtist($id: ID!) {
+    artist(id: $id) {
+      ...ArtistObjectWhole
+    }
+  }
+  ${ARTIST_FRAGMENT}
+`
+
 export const ARTISTS = gql`
   query Artists {
     artists {
@@ -136,6 +145,15 @@ export const CREATE_ARTIST = gql`
 export const UPDATE_ARTIST = gql`
   mutation UpdateArtist($updateArtistInput: UpdateArtistInput!) {
     updateArtist(updateArtistInput: $updateArtistInput) {
+      ...ArtistObjectWhole
+    }
+  }
+  ${ARTIST_FRAGMENT}
+`
+
+export const UPDATE_EVENT_LIST = gql`
+  mutation UpdateEventList($updateArtistInput: UpdateArtistInput!) {
+    updateEventList(updateArtistInput: $updateArtistInput) {
       ...ArtistObjectWhole
     }
   }

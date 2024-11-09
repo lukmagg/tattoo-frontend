@@ -27,23 +27,20 @@ const ArtistSelector = () => {
       const auxList: Artist[] = []
 
       artists.forEach((artist: Artist) => {
-        const { name, description, instagram, color } = artist
-        const newArtist = { name, description, instagram, color }
         if (artist.isActive) {
-          auxList.push(newArtist)
+          auxList.push(artist)
         }
       })
-
       // we must update global store for re-render component and print cards
       setCurrentArtistList(auxList)
     }
-  }, [data])
+  }, [data, setCurrentArtistList])
 
   const openModal = () => setModalIsOpen(true)
   const closeModal = () => setModalIsOpen(false)
 
-  const handleArtistChange = (artist: string) => {
-    setSelectedArtist(artist)
+  const handleArtistChange = (artist: Artist) => {
+    setSelectedArtist(artist.id)
     openModal()
   }
 
@@ -103,7 +100,7 @@ const ArtistSelector = () => {
               </span>
             </div>
             <div
-              onClick={() => handleArtistChange(artist.instagram)}
+              onClick={() => handleArtistChange(artist)}
               className="flex justify-center px-6 pt-4 pb-4 hover:bg-gray-200 cursor-pointer"
             >
               <button className="py-2 px-4 rounded-full font-bold text-xl text-gray-800 ">

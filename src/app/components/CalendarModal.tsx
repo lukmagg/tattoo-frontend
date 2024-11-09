@@ -1,26 +1,32 @@
 'use client'
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Modal from 'react-modal'
-import { CalendarModalProps, OnRequestCloseType } from '@/Constants'
+import {
+  Artist,
+  ARTIST,
+  CalendarModalProps,
+  OnRequestCloseType,
+  TattooEvent,
+  UPDATE_EVENT_LIST,
+} from '@/Constants'
 import { capitalizeFirstLetter } from '../lib/utils/capitalizeFirstLetter'
 import generateTimeOptions from '../lib/utils/generateTimeOptions'
 import { useStore } from '@/store'
 import createNewEvent from '../lib/utils/createNewEvent'
+import { useMutation } from '@apollo/client'
 
 const CalendarModal = ({ isOpen, onRequestClose }: CalendarModalProps) => {
   const {
     tattooSize,
     selectedArtist,
     selectedDate,
-    setTattooSize,
-    setSelectedArtist,
+    currentArtistList,
     setSelectedDate,
   } = useStore()
 
-  const [totalPrice, setTotalPrice] = useState(0)
-
-  const router = useRouter()
+  const [updateEventList, { data, loading, error }] =
+    useMutation(UPDATE_EVENT_LIST)
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newDate: Date = selectedDate
@@ -36,18 +42,25 @@ const CalendarModal = ({ isOpen, onRequestClose }: CalendarModalProps) => {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    // crear nuevo tattoo
-    const newEvent = createNewEvent(tattooSize, selectedDate)
+    // crear nuevo evento (cita) para tatuarse
+    const newEvent: TattooEvent = createNewEvent(tattooSize, selectedDate)
 
-    console.log(JSON.stringify(newEvent, null, 2))
+    // obtener el id del artista seleccionado por el cliente
+    const idArtist = selectedArtist
 
     // agendar el nuevo evento en el eventList del artista
-
-    // const formData = new FormData(event.currentTarget)
-
-    // const dataEntries = Object.fromEntries(formData.entries())
-
-    // console.log(dataEntries)
+    try {
+      await updateEventList({
+        variables: {
+          updateArtistInput: {
+            id: idArtist,
+            eventList: newEvent,
+          },
+        },
+      })
+    } catch (err) {
+      console.error('Error en la mutación:', err)
+    }
   }
 
   const dayOptions = { weekday: 'long' }

@@ -21,8 +21,8 @@ export default function createNewEvent(tattooSize: string, start: Date) {
   const newEvent: TattooEvent = {
     start,
     end,
-    title: '',
-    isBooked: false,
+    title: 'x',
+    isBooked: true,
   }
 
   return newEvent
